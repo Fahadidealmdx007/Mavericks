@@ -161,6 +161,8 @@
       letter-spacing: 1px;
       display: inline-block;
     }
+    .status.unread    { background: rgba(255,50,50,0.12);   color: #ff5050; border: 1px solid rgba(255,50,50,0.3); }
+    .status.read      { background: rgba(255,255,255,0.06); color: #888;    border: 1px solid rgba(255,255,255,0.12); }
     .status.pending   { background: rgba(255,200,0,0.12);  color: #ffc800; border: 1px solid rgba(255,200,0,0.3); }
     .status.confirmed { background: rgba(0,180,255,0.12);  color: #00b4ff; border: 1px solid rgba(0,180,255,0.3); }
     .status.shipped   { background: rgba(180,0,255,0.12);  color: #b400ff; border: 1px solid rgba(180,0,255,0.3); }
@@ -225,6 +227,24 @@
       letter-spacing: 3px;
     }
 
+    /* MARK READ BTN */
+    .mark-read-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .mark-read-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.35); }
+
+    .msg-text { font-size: 12px; color: #888; line-height: 1.6; max-width: 380px; word-break: break-word; }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .sidebar { display: none; }
@@ -256,6 +276,9 @@
       </a>
       <a class="nav-item" data-page="subscribers" href="#">
         <span class="nav-icon">✉</span> Subscribers
+      </a>
+      <a class="nav-item" data-page="messages" href="#">
+        <span class="nav-icon">💬</span> Messages <span id="unreadBadge" style="display:none;margin-left:4px;background:#ff3232;color:#fff;font-size:9px;padding:2px 6px;border-radius:999px;font-weight:700;"></span>
       </a>
     </nav>
     <div class="sidebar-footer">
@@ -362,6 +385,23 @@
       </div>
     </div>
 
+    <!-- MESSAGES -->
+    <div class="page-section" id="page-messages">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Messages</div>
+          <div class="page-sub">Contact form submissions</div>
+        </div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-header">
+          <span class="section-card-title">All Messages</span>
+          <span class="badge" id="msgsBadge">0 messages</span>
+        </div>
+        <div id="messagesTable"><div class="loading">Loading...</div></div>
+      </div>
+    </div>
+
   </div><!-- /main -->
 
   <script>
@@ -393,7 +433,7 @@
 
     // ── LOAD ALL DATA ──
     async function loadAll() {
-      await Promise.all([loadOrders(), loadProducts(), loadSubscribers()]);
+      await Promise.all([loadOrders(), loadProducts(), loadSubscribers(), loadMessages()]);
     }
 
     // ── ORDERS ──
@@ -531,6 +571,51 @@
           </tbody>
         </table>`;
       } catch { showError("subscribersTable"); }
+    }
+
+    // ── MESSAGES ──
+    async function loadMessages() {
+      try {
+        const res  = await fetch(`${API}/contact`);
+        const data = await res.json();
+        const msgs = data.data || [];
+        const unread = msgs.filter(m => m.status === "unread").length;
+        document.getElementById("msgsBadge").textContent = msgs.length + " message" + (msgs.length !== 1 ? "s" : "");
+        const badge = document.getElementById("unreadBadge");
+        if (unread > 0) { badge.textContent = unread; badge.style.display = "inline"; }
+        else { badge.style.display = "none"; }
+        const el = document.getElementById("messagesTable");
+        if (!msgs.length) { el.innerHTML = `<div class="empty-state">No messages yet.</div>`; return; }
+        el.innerHTML = `<table>
+          <thead><tr><th>From</th><th>Subject</th><th>Message</th><th>Date</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            ${msgs.map(m => `
+              <tr id="msg-row-${m.id}" style="${m.status === 'unread' ? '' : 'opacity:0.65;'}">
+                <td>
+                  <div style="font-weight:700;">${m.name}</div>
+                  <div style="font-size:11px;opacity:0.45;">${m.email}</div>
+                </td>
+                <td style="font-weight:600;">${m.subject}</td>
+                <td><div class="msg-text">${m.message.length > 100 ? m.message.slice(0,100) + "…" : m.message}</div></td>
+                <td style="font-size:11px;opacity:0.5;">${formatDate(m.sent_at)}</td>
+                <td><span class="status ${m.status}">${m.status}</span></td>
+                <td>
+                  ${m.status === 'unread'
+                    ? `<button class="mark-read-btn" onclick="markRead('${m.id}')">Mark Read</button>`
+                    : ''}
+                </td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>`;
+      } catch { showError("messagesTable"); }
+    }
+
+    async function markRead(id) {
+      try {
+        await fetch(`${API}/contact/${id}/read`, { method: "PATCH" });
+        await loadMessages();
+      } catch { alert("Failed to update message"); }
     }
 
     function formatDate(iso) {
