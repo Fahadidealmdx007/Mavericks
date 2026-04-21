@@ -1,0 +1,4 @@
+com/mavericks/model/NewsletterSubscriber.class
+com/mavericks/model/Order.class
+com/mavericks/MavericksApplication.class
+com/mavericks/repository/OrderRepository.class

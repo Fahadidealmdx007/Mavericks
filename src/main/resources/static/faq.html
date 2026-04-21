@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — MAVERICKS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Montserrat",sans-serif;}
+    body{background:#050507;color:#fff;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+
+    nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;z-index:100;background:rgba(5,5,7,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .logo{font-size:22px;font-weight:900;letter-spacing:6px;}
+    .nav-links{display:flex;gap:22px;font-size:13px;text-transform:uppercase;letter-spacing:2px;}
+    .nav-links a{opacity:0.7;transition:opacity 0.2s;}
+    .nav-links a:hover,.nav-links a.active{opacity:1;}
+    .nav-links a.active{border-bottom:2px solid #fff;padding-bottom:2px;}
+
+    .page-hero{padding:140px 48px 60px;text-align:center;}
+    .page-hero h1{font-size:clamp(40px,7vw,80px);font-weight:900;letter-spacing:10px;}
+    .page-hero p{margin-top:14px;font-size:14px;letter-spacing:4px;text-transform:uppercase;opacity:0.4;}
+
+    .container{max-width:780px;margin:0 auto;padding:0 24px 100px;}
+
+    /* CATEGORY TABS */
+    .cat-tabs{display:flex;gap:8px;margin-bottom:48px;flex-wrap:wrap;}
+    .cat-tab{padding:8px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:2px;cursor:pointer;font-family:inherit;transition:background 0.2s,border-color 0.2s,color 0.2s;}
+    .cat-tab.active{background:#fff;color:#000;border-color:#fff;}
+
+    /* FAQ */
+    .faq-section{display:none;}
+    .faq-section.active{display:block;}
+    .faq-section-title{font-size:11px;text-transform:uppercase;letter-spacing:4px;opacity:0.35;margin-bottom:16px;}
+
+    .faq-list{display:flex;flex-direction:column;gap:3px;margin-bottom:48px;}
+    .faq-item{}
+    .faq-q{padding:20px 22px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);font-size:14px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;border-radius:12px;transition:background 0.2s,border-color 0.2s;}
+    .faq-q:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);}
+    .faq-q.open{border-radius:12px 12px 0 0;border-color:rgba(255,255,255,0.15);}
+    .faq-icon{font-size:20px;opacity:0.5;flex-shrink:0;transition:transform 0.3s;}
+    .faq-q.open .faq-icon{transform:rotate(45deg);opacity:1;}
+    .faq-a{max-height:0;overflow:hidden;font-size:14px;color:#888;line-height:1.8;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-top:none;border-radius:0 0 12px 12px;transition:max-height 0.35s ease,padding 0.35s ease;}
+    .faq-a.open{max-height:300px;padding:18px 22px;}
+    .faq-a a{color:#fff;text-decoration:underline;text-underline-offset:3px;}
+
+    /* CTA */
+    .still-stuck{margin-top:60px;padding:40px;border-radius:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);text-align:center;}
+    .still-stuck h3{font-size:18px;font-weight:900;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
+    .still-stuck p{font-size:14px;color:#777;margin-bottom:24px;}
+    .contact-link{display:inline-flex;padding:12px 28px;border-radius:999px;background:#fff;color:#000;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2px;text-decoration:none;transition:background 0.2s;}
+    .contact-link:hover{background:#e0e0e0;}
+
+    footer{padding:40px 48px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;font-size:12px;opacity:0.35;}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:768px){
+      nav{padding:14px 20px;}
+      .nav-links{display:none;}
+      .page-hero{padding:120px 20px 40px;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">MAVERICKS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="lookbook.html">Lookbook</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html" class="active">FAQ</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <h1>FAQ</h1>
+    <p>Everything you need to know</p>
+  </div>
+
+  <div class="container">
+    <div class="cat-tabs reveal">
+      <button class="cat-tab active" data-cat="orders">Orders</button>
+      <button class="cat-tab" data-cat="sizing">Sizing</button>
+      <button class="cat-tab" data-cat="shipping">Shipping</button>
+      <button class="cat-tab" data-cat="returns">Returns</button>
+      <button class="cat-tab" data-cat="products">Products</button>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="faq-section active reveal" data-section="orders">
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">How do I place an order? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Browse our products, select your size and color, then click "Add to Cart". When you're ready, go to your cart and click "Proceed to Checkout". Fill in your shipping details and place your order.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">Can I change or cancel my order? <span class="faq-icon">+</span></div>
+          <div class="faq-a">You can cancel or change your order within 2 hours of placing it. After that, your order enters production and cannot be changed. <a href="contact.html">Contact us</a> immediately if you need to make changes.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">How do I track my order? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Once your order ships, you'll receive a tracking number via email. You can use this to track your package on the carrier's website.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">My order says delivered but I haven't received it. <span class="faq-icon">+</span></div>
+          <div class="faq-a">Check with your neighbors and building reception first. If it's still missing after 2 days, <a href="contact.html">contact us</a> with your order ID and we'll investigate.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIZING -->
+    <div class="faq-section reveal" data-section="sizing">
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">How do Mavericks hoodies fit? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Our hoodies are oversized by design. If you want the full oversized look, go true to size. If you prefer a more fitted look, size down one size.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">Do you have a size guide? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Yes. Click "Size Guide" on any product page to see chest, length, and shoulder measurements for each size. Our sizes run XS to XL on most pieces.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">Are your products unisex? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Yes, all Mavericks pieces are designed as unisex. Women typically size down 1–2 sizes for a more fitted look, or stay true to size for the oversized aesthetic.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">Will my hoodie shrink after washing? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Our heavyweight fleece may shrink slightly (1–3%) after the first wash. We recommend washing in cold water and air drying to preserve the fit and fabric.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHIPPING -->
+    <div class="faq-section reveal" data-section="shipping">
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">How long does shipping take? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Domestic (Bangladesh): 3–5 business days. International: 10–20 business days. Express options may be available at checkout depending on your location.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">Do you offer free shipping? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Yes — free shipping on all orders over $120. Orders under $120 have a flat $9.99 shipping fee.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">Do you ship internationally? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Yes. We currently ship to most countries. International orders may be subject to customs fees depending on your country — these are paid by the customer.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">My package is stuck in customs. What do I do? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Customs delays are outside our control. If your package has been held for more than 10 business days, <a href="contact.html">contact us</a> and we'll help you resolve it.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RETURNS -->
+    <div class="faq-section reveal" data-section="returns">
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">What is your return policy? <span class="faq-icon">+</span></div>
+          <div class="faq-a">We accept returns within 14 days of delivery. Items must be unworn, unwashed, and in original condition with tags attached. Sale items are final sale.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">How do I start a return? <span class="faq-icon">+</span></div>
+          <div class="faq-a"><a href="contact.html">Contact us</a> with your order ID and reason for return. We'll send you return instructions within 24 hours.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">When will I receive my refund? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Once we receive and inspect your return, refunds are processed within 3–5 business days. It may take an additional 3–7 days to appear on your statement depending on your bank.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">Can I exchange for a different size? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Yes — size exchanges are free. <a href="contact.html">Contact us</a> with your order ID and the size you'd like instead. Subject to stock availability.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="faq-section reveal" data-section="products">
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">What fabric are your hoodies made from? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Our Double Zipper Hoodies are made from 400GSM heavyweight fleece — 80% cotton, 20% polyester. Built to be soft, warm, and durable enough to last years.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">When is the next drop? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Join our drop list at the bottom of the homepage to get first access to Drop 02 before it goes public. We don't announce dates publicly — drop list only.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">Will sold-out items be restocked? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Rarely — we do limited runs by design. Occasionally popular colorways get a restock, but we don't guarantee it. Join the drop list to be notified if something comes back.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">How should I wash my Mavericks pieces? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Machine wash cold, inside out, with similar colors. Do not bleach. Tumble dry low or air dry. Do not iron directly on prints or graphics.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="still-stuck reveal">
+      <h3>Still have questions?</h3>
+      <p>Our team responds within 24–48 hours.</p>
+      <a href="contact.html" class="contact-link">Contact Us</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>© <span id="year"></span> Mavericks Studio</span>
+    <span>Hotter Than Yesterday</span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.querySelectorAll(".cat-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".cat-tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".faq-section").forEach(s => s.classList.remove("active"));
+        tab.classList.add("active");
+        document.querySelector(`[data-section="${tab.dataset.cat}"]`).classList.add("active");
+      });
+    });
+
+    function toggle(el) {
+      const answer = el.nextElementSibling;
+      el.classList.toggle("open");
+      answer.classList.toggle("open");
+    }
+
+    const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target);} }), {threshold:0.1});
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
