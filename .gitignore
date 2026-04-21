@@ -1,11 +1,26 @@
+# Java compiled files
 target/
 *.class
 *.jar
 *.war
 *.ear
-*.iml
-.idea/
-.vscode/
-*.DS_Store
+
+# Database files (sensitive — don't upload)
 mavericksdb.mv.db
 mavericksdb.trace.db
+*.db
+
+# IDE files (not needed by others)
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Mac junk files
+.DS_Store
+
+# Environment / secret files (never upload these)
+.env
+*.env
+application-secret.properties
