@@ -1433,6 +1433,164 @@
       .cart-sidebar { width: 100vw; }
     }
 
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      background: #fff;
+      color: #000;
+    }
+    .stat-item {
+      padding: 36px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(0,0,0,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-big {
+      font-size: clamp(28px,4vw,46px);
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+    .stat-desc {
+      margin-top: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      opacity: 0.55;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      background: #050507;
+      padding: 120px 24px;
+      min-height: auto;
+    }
+    .testimonials-header {
+      max-width: 1180px;
+      margin: 0 auto 52px;
+    }
+    .testimonials-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 22px;
+    }
+    .review-card {
+      padding: 30px 28px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .review-card:hover { border-color: rgba(255,255,255,0.22); transform: translateY(-4px); }
+    .stars { color: #fff; font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
+    .review-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #b0b0b0;
+      margin-bottom: 24px;
+    }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800;
+    }
+    .review-name { font-size: 13px; font-weight: 700; letter-spacing: 1px; }
+    .review-handle { font-size: 11px; opacity: 0.4; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+    /* ── FAQ HOME ── */
+    #faq-home {
+      background: #08080f;
+      padding: 120px 24px;
+      min-height: auto;
+    }
+    .faq-home-inner { max-width: 780px; margin: 0 auto; }
+    .faq-home-header { margin-bottom: 40px; }
+    .faq-home-list { display: flex; flex-direction: column; gap: 3px; }
+    .fh-item {}
+    .fh-q {
+      padding: 20px 22px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px; font-weight: 600;
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      border-radius: 12px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .fh-q:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); }
+    .fh-q.open { border-radius: 12px 12px 0 0; border-color: rgba(255,255,255,0.15); }
+    .fh-icon { font-size: 20px; opacity: 0.5; flex-shrink: 0; transition: transform 0.3s; }
+    .fh-q.open .fh-icon { transform: rotate(45deg); opacity: 1; }
+    .fh-a {
+      max-height: 0; overflow: hidden;
+      font-size: 14px; color: #888; line-height: 1.8;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08); border-top: none;
+      border-radius: 0 0 12px 12px;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .fh-a.open { max-height: 200px; padding: 18px 22px; }
+    .fh-a a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+    .faq-home-cta { margin-top: 36px; text-align: center; font-size: 13px; color: #666; }
+    .faq-home-cta a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── NEWSLETTER SECTION ── */
+    #newsletter-section {
+      background: radial-gradient(circle at 30% 50%, rgba(255,0,120,0.1), transparent 55%),
+                  radial-gradient(circle at 70% 50%, rgba(100,0,255,0.08), transparent 55%),
+                  #0a0a12;
+      padding: 120px 24px;
+      min-height: auto;
+      text-align: center;
+    }
+    .newsletter-section-inner { max-width: 600px; margin: 0 auto; }
+    .newsletter-eyebrow {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 4px;
+      opacity: 0.45; margin-bottom: 16px;
+    }
+    .newsletter-headline {
+      font-size: clamp(30px,5vw,56px);
+      font-weight: 900; letter-spacing: 6px; line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .newsletter-sub {
+      font-size: 14px; color: #888; line-height: 1.7;
+      margin-bottom: 36px; max-width: 440px; margin-left: auto; margin-right: auto;
+    }
+    .newsletter-form {
+      display: flex; gap: 10px; max-width: 460px;
+      margin: 0 auto; flex-wrap: wrap; justify-content: center;
+    }
+    .newsletter-form input {
+      flex: 1; min-width: 220px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      color: #fff; font-size: 14px; font-family: inherit; outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-form input:focus { border-color: rgba(255,255,255,0.5); }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.25); }
+    .newsletter-form button {
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: #fff; color: #000;
+      border: none; font-size: 13px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 2px;
+      cursor: pointer; font-family: inherit;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .newsletter-form button:hover { background: #e0e0e0; transform: translateY(-2px); }
+    .newsletter-form button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .newsletter-fine { margin-top: 14px; font-size: 11px; opacity: 0.3; letter-spacing: 1px; }
+
     /* ── REVEAL ── */
     .reveal {
       opacity: 0;
@@ -1446,6 +1604,17 @@
     }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stats-strip { grid-template-columns: repeat(2,1fr); }
+      .stat-item { border-bottom: 1px solid rgba(0,0,0,0.1); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .stats-strip { grid-template-columns: 1fr 1fr; }
+      .newsletter-form { flex-direction: column; align-items: stretch; }
+      .newsletter-form input, .newsletter-form button { width: 100%; min-width: unset; }
+    }
+
     @media (max-width: 960px) {
       nav { padding: 14px 20px; }
       .nav-links { display: none; }
@@ -1701,10 +1870,10 @@
           <div class="card-tag">Core</div>
           <div class="card-title">Hoodies</div>
           <div class="card-media">
-            <img src="https://images.pexels.com/photos/4987620/pexels-photo-4987620.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks hoodies" />
+            <img src="https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks hoodies" />
           </div>
           <div class="card-footer">
-            <span>Drop 01 · 6 colors</span>
+            <span>Drop 01 · 3 colors</span>
             <span class="chip-small">Shop</span>
           </div>
         </div>
@@ -1725,7 +1894,7 @@
           <div class="card-tag">Movement</div>
           <div class="card-title">Baggy Pants</div>
           <div class="card-media">
-            <img src="https://images.pexels.com/photos/18462133/pexels-photo-18462133.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks baggy pants" />
+            <img src="https://images.pexels.com/photos/5236996/pexels-photo-5236996.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks baggy pants" />
           </div>
           <div class="card-footer">
             <span>Street comfort</span>
@@ -1737,7 +1906,7 @@
           <div class="card-tag">Typography</div>
           <div class="card-title">Shirts</div>
           <div class="card-media">
-            <img src="https://images.pexels.com/photos/2008949/pexels-photo-2008949.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks shirts" />
+            <img src="https://images.pexels.com/photos/5493535/pexels-photo-5493535.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks shirts" />
           </div>
           <div class="card-footer">
             <span>Statement prints</span>
@@ -1745,6 +1914,118 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div id="stats">
+    <div class="stats-strip reveal">
+      <div class="stat-item">
+        <div class="stat-big">500+</div>
+        <div class="stat-desc">Orders Shipped</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-big">3</div>
+        <div class="stat-desc">Countries</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-big">100%</div>
+        <div class="stat-desc">Satisfaction Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-big">400GSM</div>
+        <div class="stat-desc">Heavyweight Fleece</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="testimonials-header reveal">
+      <div class="section-label">What they say</div>
+      <div class="section-title">Real customers. Real feedback.</div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Wore the Onyx hoodie to my uni lecture and got three compliments before I even sat down. The weight of the fabric alone feels premium. Worth every penny."</p>
+        <div class="review-author">
+          <div class="review-avatar">RK</div>
+          <div>
+            <div class="review-name">Rafiq K.</div>
+            <div class="review-handle">Dhaka, BD</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Finally a Bangladeshi brand that doesn't look cheap. The double zipper detail is everything. Sized down one and it fits perfectly. Shipping was faster than expected too."</p>
+        <div class="review-author">
+          <div class="review-avatar">TN</div>
+          <div>
+            <div class="review-name">Tasfia N.</div>
+            <div class="review-handle">Chittagong, BD</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Got the Crimson. Wore it, washed it, wore it again. Still looks brand new. You can tell this isn't fast fashion — it's built to last. Already saving up for Drop 02."</p>
+        <div class="review-author">
+          <div class="review-avatar">SM</div>
+          <div>
+            <div class="review-name">Shoaib M.</div>
+            <div class="review-handle">London, UK</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ (homepage preview) -->
+  <section id="faq-home">
+    <div class="faq-home-inner">
+      <div class="faq-home-header reveal">
+        <div class="section-label">Common questions</div>
+        <div class="section-title">Got questions? We've got answers.</div>
+      </div>
+      <div class="faq-home-list reveal">
+        <div class="fh-item">
+          <div class="fh-q" onclick="toggleFh(this)">How do Mavericks hoodies fit? <span class="fh-icon">+</span></div>
+          <div class="fh-a">Our hoodies are oversized by design. Go true to size for the full oversized look, or size down one for a more fitted silhouette. All pieces are unisex.</div>
+        </div>
+        <div class="fh-item">
+          <div class="fh-q" onclick="toggleFh(this)">How long does shipping take? <span class="fh-icon">+</span></div>
+          <div class="fh-a">Domestic (Bangladesh): 3–5 business days. International: 10–20 business days. Orders over $120 ship free. You'll get a tracking number by email once shipped.</div>
+        </div>
+        <div class="fh-item">
+          <div class="fh-q" onclick="toggleFh(this)">What fabric are the hoodies made from? <span class="fh-icon">+</span></div>
+          <div class="fh-a">400GSM heavyweight fleece — 80% cotton, 20% polyester. Built to be soft, warm, and durable enough to last years without losing shape or color.</div>
+        </div>
+        <div class="fh-item">
+          <div class="fh-q" onclick="toggleFh(this)">Can I return or exchange my order? <span class="fh-icon">+</span></div>
+          <div class="fh-a">Yes — returns accepted within 14 days of delivery if the item is unworn and unwashed. Size exchanges are free. <a href="contact.html">Contact us</a> to start the process.</div>
+        </div>
+        <div class="fh-item">
+          <div class="fh-q" onclick="toggleFh(this)">When is Drop 02? <span class="fh-icon">+</span></div>
+          <div class="fh-a">We don't announce drop dates publicly — drop list members get first access. Join the list below to be notified before anyone else.</div>
+        </div>
+      </div>
+      <div class="faq-home-cta reveal">See all FAQs → <a href="faq.html">Visit FAQ page</a></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER CTA SECTION -->
+  <section id="newsletter-section">
+    <div class="newsletter-section-inner reveal">
+      <div class="newsletter-eyebrow">Drop List</div>
+      <div class="newsletter-headline">Be First.<br/>Always.</div>
+      <p class="newsletter-sub">Join the list and get first access to Drop 02 before it goes public — new colorways, limited quantities, and early pricing. No spam. Ever.</p>
+      <form class="newsletter-form" id="newsletterSectionForm">
+        <input type="email" placeholder="Enter your email address" required />
+        <button type="submit" id="nlSectionBtn">Join the Drop List</button>
+      </form>
+      <div class="newsletter-fine">No spam. Unsubscribe anytime.</div>
     </div>
   </section>
 
@@ -2106,10 +2387,15 @@
 
       emptyEl.style.display = "none";
       footerEl.style.display = "block";
+      const colorImgMap = {
+        "Onyx":    "https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=144&h=176&fit=crop",
+        "Crimson": "https://images.pexels.com/photos/5319493/pexels-photo-5319493.jpeg?auto=compress&cs=tinysrgb&w=144&h=176&fit=crop",
+        "Emerald": "https://images.pexels.com/photos/5319577/pexels-photo-5319577.jpeg?auto=compress&cs=tinysrgb&w=144&h=176&fit=crop"
+      };
       itemsEl.innerHTML = cartItems.map(item => `
         <div class="cart-item" data-id="${item.id}">
           <img class="cart-item-img"
-            src="https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=144&h=176&fit=crop"
+            src="${colorImgMap[item.color] || colorImgMap['Onyx']}"
             alt="${item.product_name}" />
           <div class="cart-item-info">
             <div>
@@ -2332,6 +2618,34 @@
       } catch { showToast("Server offline — run: npm start", true); }
       submitBtn.textContent = "Get Early Access";
       submitBtn.disabled = false;
+    });
+
+    // ── HOMEPAGE FAQ ──
+    function toggleFh(el) {
+      const answer = el.nextElementSibling;
+      el.classList.toggle("open");
+      answer.classList.toggle("open");
+    }
+
+    // ── NEWSLETTER SECTION FORM ──
+    document.getElementById("newsletterSectionForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const emailInput = e.target.querySelector("input[type=email]");
+      const btn = document.getElementById("nlSectionBtn");
+      btn.textContent = "Joining...";
+      btn.disabled = true;
+      try {
+        const res = await fetch(`${API}/newsletter`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: emailInput.value })
+        });
+        const data = await res.json();
+        showToast(data.message, !data.success);
+        if (data.success) { e.target.reset(); btn.textContent = "You're In ✓"; return; }
+      } catch { showToast("Server offline — start the backend first.", true); }
+      btn.textContent = "Join the Drop List";
+      btn.disabled = false;
     });
 
     // ── SCROLL REVEAL ──
