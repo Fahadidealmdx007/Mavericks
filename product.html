@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product — MAVERICKS</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Montserrat",sans-serif;}
+    body{background:#050507;color:#fff;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+
+    nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;z-index:100;background:rgba(5,5,7,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .logo{font-size:22px;font-weight:900;letter-spacing:6px;}
+    .nav-links{display:flex;gap:22px;font-size:13px;text-transform:uppercase;letter-spacing:2px;}
+    .nav-links a{opacity:0.7;transition:opacity 0.2s;}
+    .nav-links a:hover{opacity:1;}
+
+    /* BREADCRUMB */
+    .breadcrumb{padding:100px 48px 0;font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.35;display:flex;gap:8px;align-items:center;}
+    .breadcrumb a:hover{opacity:0.7;}
+    .breadcrumb span{opacity:0.5;}
+
+    /* PRODUCT LAYOUT */
+    .product-layout{max-width:1100px;margin:32px auto 80px;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+
+    /* IMAGE SIDE */
+    .product-images{}
+    .main-img-wrap{border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);aspect-ratio:1;background:#111;position:relative;}
+    .main-img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.3s;}
+    .main-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;opacity:0.08;letter-spacing:-2px;}
+    .thumb-row{display:flex;gap:10px;margin-top:12px;}
+    .thumb{width:72px;height:72px;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,0.08);cursor:pointer;transition:border-color 0.2s;background:#111;flex-shrink:0;}
+    .thumb:hover,.thumb.active{border-color:var(--team-color,rgba(255,255,255,0.4));}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+
+    /* INFO SIDE */
+    .product-info-side{}
+    .product-label{font-size:11px;text-transform:uppercase;letter-spacing:3px;opacity:0.35;margin-bottom:10px;}
+    .product-title{font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:3px;line-height:1.15;}
+    .product-team-badge{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:6px 14px;border-radius:999px;border:1px solid var(--team-color,rgba(255,255,255,0.15));background:var(--team-color-bg,rgba(255,255,255,0.04));font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;}
+    .team-dot{width:8px;height:8px;border-radius:50%;background:var(--team-color,#fff);}
+
+    /* BADGES */
+    .badge-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+    .badge{padding:4px 10px;border-radius:4px;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
+    .badge-limited{background:#e8002d;color:#fff;}
+    .badge-new{background:#00d2be;color:#000;}
+    .badge-driver{background:#7c3aed;color:#fff;}
+    .badge-edition{background:rgba(255,255,255,0.1);color:#fff;}
+
+    /* PRICE */
+    .price-block{margin-top:24px;display:flex;align-items:baseline;gap:12px;}
+    .price-main{font-size:36px;font-weight:900;letter-spacing:2px;}
+    .price-main.discounted{color:#ff8000;}
+    .price-old{font-size:18px;font-weight:600;opacity:0.3;text-decoration:line-through;}
+    .price-save{font-size:12px;color:#52e252;font-weight:700;letter-spacing:1px;}
+
+    /* QUOTE */
+    .product-quote{margin-top:20px;padding:16px 20px;border-left:2px solid var(--team-color,rgba(255,255,255,0.2));font-size:13px;font-style:italic;opacity:0.5;line-height:1.7;}
+
+    /* DESCRIPTION */
+    .product-desc{margin-top:20px;font-size:13px;line-height:1.8;opacity:0.55;}
+
+    /* SELECTORS */
+    .selector-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.35;margin-top:24px;margin-bottom:10px;}
+    .option-pills{display:flex;gap:8px;flex-wrap:wrap;}
+    .option-pill{padding:8px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+    .option-pill:hover{border-color:rgba(255,255,255,0.35);}
+    .option-pill.active{background:var(--team-color,#fff);border-color:var(--team-color,#fff);color:#000;}
+
+    /* CTA */
+    .cta-row{display:flex;gap:12px;margin-top:32px;}
+    .btn-add{flex:1;padding:16px 0;border-radius:999px;background:var(--team-color,#fff);color:#000;border:none;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:3px;cursor:pointer;font-family:inherit;transition:opacity 0.2s,transform 0.2s;}
+    .btn-add:hover{opacity:0.85;transform:translateY(-2px);}
+    .btn-fan{padding:16px 22px;border-radius:999px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+    .btn-fan:hover{border-color:var(--team-color,rgba(255,255,255,0.4));}
+
+    /* SPECS */
+    .specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);}
+    .spec-item{font-size:11px;text-transform:uppercase;letter-spacing:1px;}
+    .spec-key{opacity:0.3;margin-bottom:4px;}
+    .spec-val{font-weight:700;opacity:0.7;}
+
+    /* RELATED */
+    .related-section{max-width:1100px;margin:0 auto 80px;padding:0 24px;}
+    .section-title{font-size:18px;font-weight:900;letter-spacing:4px;text-transform:uppercase;margin-bottom:24px;opacity:0.7;}
+    .related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+    .related-card{border-radius:16px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);overflow:hidden;cursor:pointer;transition:transform 0.2s,border-color 0.2s;}
+    .related-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.2);}
+    .related-img{width:100%;aspect-ratio:1;object-fit:cover;background:#111;}
+    .related-info{padding:12px;}
+    .related-name{font-size:12px;font-weight:700;letter-spacing:1px;}
+    .related-price{font-size:13px;font-weight:900;margin-top:4px;opacity:0.7;}
+
+    /* LOADING / ERROR */
+    .loading{text-align:center;padding:120px 24px;font-size:13px;text-transform:uppercase;letter-spacing:3px;opacity:0.3;}
+
+    footer{padding:40px 48px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;font-size:12px;opacity:0.35;}
+
+    @media(max-width:860px){
+      nav{padding:14px 20px;}.nav-links{display:none;}
+      .product-layout{grid-template-columns:1fr;gap:32px;}
+      .breadcrumb{padding:90px 20px 0;}
+      .related-grid{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">MAVERICKS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="teams.html">Teams</a>
+      <a href="drivers.html">Drivers</a>
+      <a href="fan-mode.html">Fan Mode</a>
+      <a href="race-deals.html">Race Deals</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="breadcrumb" id="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>/</span>
+    <a href="index.html#categories">Shop</a>
+    <span>/</span>
+    <span id="breadcrumbName">Product</span>
+  </div>
+
+  <div id="productRoot">
+    <div class="loading">Loading product...</div>
+  </div>
+
+  <div class="related-section" id="relatedSection" style="display:none">
+    <div class="section-title">You May Also Like</div>
+    <div class="related-grid" id="relatedGrid"></div>
+  </div>
+
+  <footer>
+    <span>© <span id="year"></span> Mavericks Studio</span>
+    <span>Hotter Than Yesterday</span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const API = "http://localhost:8080/api/products";
+    const CARD_IMGS = {
+      p1:"https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p2:"https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p3:"https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p4:"https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p5:"https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p6:"https://images.pexels.com/photos/3622614/pexels-photo-3622614.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p7:"https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p8:"https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p9:"https://images.pexels.com/photos/3622614/pexels-photo-3622614.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p10:"https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p16:"https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p17:"https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p18:"https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p19:"https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800",
+      p20:"https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=800",
+    };
+    const TEAM_COLORS = {
+      "Red Bull Racing":"#1e41ff","Ferrari":"#e8002d","Mercedes-AMG Petronas":"#00d2be",
+      "McLaren":"#ff8000","Aston Martin":"#006f62","Alpine":"#0093cc",
+      "Williams":"#005aff","Haas":"#b6babd","Stake Sauber":"#52e252"
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+    const raceWeekend = localStorage.getItem("mv_race_weekend") === "true";
+
+    let selectedSize  = "";
+    let selectedColor = "";
+    let currentProduct = null;
+
+    function setTeamColor(team) {
+      const c = TEAM_COLORS[team] || "#fff";
+      document.documentElement.style.setProperty("--team-color", c);
+      document.documentElement.style.setProperty("--team-color-bg", c + "18");
+    }
+
+    function renderProduct(p) {
+      currentProduct = p;
+      document.title = p.name + " — MAVERICKS";
+      document.getElementById("breadcrumbName").textContent = p.name;
+      setTeamColor(p.team);
+
+      const imgSrc = CARD_IMGS[p.id] || CARD_IMGS.p2;
+      const teamColor = TEAM_COLORS[p.team] || "#fff";
+
+      let finalDiscount = p.discount || 0;
+      if (raceWeekend) finalDiscount = Math.min(finalDiscount + 5, 60);
+      const finalPrice = finalDiscount > 0 ? p.price * (1 - finalDiscount / 100) : p.price;
+      const savings = finalDiscount > 0 ? (p.price - finalPrice).toFixed(0) : 0;
+
+      const sizes  = p.sizes  ? p.sizes.split(",").map(s => s.trim()).filter(Boolean)  : ["S","M","L","XL","XXL"];
+      const colors = p.colors ? p.colors.split(",").map(c => c.trim()).filter(Boolean) : ["Black"];
+
+      const badges = [];
+      if (p.limited) badges.push(`<span class="badge badge-limited">Limited Edition</span>`);
+      if (p.newDrop) badges.push(`<span class="badge badge-new">New Drop</span>`);
+      if (p.driver && p.driver.trim()) badges.push(`<span class="badge badge-driver">${p.driver}</span>`);
+      if (p.edition && p.edition !== "fan") badges.push(`<span class="badge badge-edition">${p.edition}</span>`);
+
+      document.getElementById("productRoot").innerHTML = `
+        <div class="product-layout">
+          <!-- IMAGE SIDE -->
+          <div class="product-images">
+            <div class="main-img-wrap">
+              <img class="main-img" id="mainImg" src="${imgSrc}" alt="${p.name}"
+                onerror="this.style.display='none';document.getElementById('imgPlaceholder').style.display='flex';" />
+              <div class="main-img-placeholder" id="imgPlaceholder" style="display:none">${p.id.toUpperCase()}</div>
+            </div>
+            <div class="thumb-row">
+              <div class="thumb active" onclick="switchImg('${imgSrc}',this)"><img src="${imgSrc}" alt="" /></div>
+            </div>
+          </div>
+
+          <!-- INFO SIDE -->
+          <div class="product-info-side">
+            <div class="product-label">${p.category} · 2026 Season</div>
+            <h1 class="product-title">${p.name}</h1>
+
+            ${p.team ? `
+              <div class="product-team-badge" style="border-color:${teamColor}33;background:${teamColor}12">
+                <span class="team-dot"></span>${p.team}
+              </div>` : ""}
+
+            <div class="badge-strip">${badges.join("")}</div>
+
+            <div class="price-block">
+              ${finalDiscount > 0 ? `<span class="price-old">৳${p.price.toLocaleString()}</span>` : ""}
+              <span class="price-main ${finalDiscount > 0 ? 'discounted' : ''}">৳${Math.round(finalPrice).toLocaleString()}</span>
+              ${savings > 0 ? `<span class="price-save">Save ৳${savings}</span>` : ""}
+            </div>
+
+            ${p.quote ? `<div class="product-quote">"${p.quote}"</div>` : ""}
+            ${p.description ? `<div class="product-desc">${p.description}</div>` : ""}
+
+            <!-- SIZE -->
+            <div class="selector-label">Size</div>
+            <div class="option-pills" id="sizePills">
+              ${sizes.map(s => `<button class="option-pill" onclick="selectSize('${s}',this)">${s}</button>`).join("")}
+            </div>
+
+            <!-- COLOR -->
+            <div class="selector-label">Color</div>
+            <div class="option-pills" id="colorPills">
+              ${colors.map(c => `<button class="option-pill" onclick="selectColor('${c}',this)">${c}</button>`).join("")}
+            </div>
+
+            <div class="cta-row">
+              <button class="btn-add" onclick="addToCart()">Add to Cart</button>
+              ${p.team ? `<button class="btn-fan" onclick="setFanTeam('${p.team}')">My Team</button>` : ""}
+            </div>
+
+            <div class="specs-grid">
+              <div class="spec-item"><div class="spec-key">Season</div><div class="spec-val">${p.season || 2026}</div></div>
+              <div class="spec-item"><div class="spec-key">Edition</div><div class="spec-val">${p.edition || "Fan"}</div></div>
+              <div class="spec-item"><div class="spec-key">Category</div><div class="spec-val">${p.category}</div></div>
+              <div class="spec-item"><div class="spec-key">Stock</div><div class="spec-val">${p.stock > 0 ? (p.stock < 10 ? "Low Stock" : "In Stock") : "Sold Out"}</div></div>
+              ${p.tags ? `<div class="spec-item" style="grid-column:1/-1"><div class="spec-key">Tags</div><div class="spec-val" style="opacity:0.45;font-weight:400">${p.tags}</div></div>` : ""}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function switchImg(src, thumb) {
+      document.getElementById("mainImg").src = src;
+      document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
+      thumb.classList.add("active");
+    }
+
+    function selectSize(s, el) {
+      selectedSize = s;
+      document.querySelectorAll("#sizePills .option-pill").forEach(p => p.classList.remove("active"));
+      el.classList.add("active");
+    }
+    function selectColor(c, el) {
+      selectedColor = c;
+      document.querySelectorAll("#colorPills .option-pill").forEach(p => p.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    function addToCart() {
+      if (!currentProduct) return;
+      const msg = currentProduct.name + (selectedSize ? " · " + selectedSize : "") + (selectedColor ? " · " + selectedColor : "");
+      alert("Added to cart: " + msg + "\n\n(Cart system coming in Drop 02)");
+    }
+
+    function setFanTeam(team) {
+      localStorage.setItem("mv_fan_team", team);
+      alert("✓ " + team + " set as your team!");
+    }
+
+    function renderRelated(products, currentId, currentCat) {
+      const related = products.filter(p => p.id !== currentId && (p.category === currentCat || p.team === (currentProduct && currentProduct.team))).slice(0, 4);
+      if (related.length === 0) return;
+      document.getElementById("relatedSection").style.display = "block";
+      document.getElementById("relatedGrid").innerHTML = related.map(p => {
+        const img = CARD_IMGS[p.id] || CARD_IMGS.p2;
+        return `
+          <div class="related-card" onclick="window.location='product.html?id=${p.id}'">
+            <img class="related-img" src="${img}" alt="${p.name}" loading="lazy" />
+            <div class="related-info">
+              <div class="related-name">${p.name}</div>
+              <div class="related-price">৳${p.price.toLocaleString()}</div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    async function loadProduct() {
+      if (!productId) {
+        document.getElementById("productRoot").innerHTML = `<div class="loading">No product ID in URL. Try <a href="index.html" style="opacity:0.6;text-decoration:underline">going back to shop</a>.</div>`;
+        return;
+      }
+      try {
+        const res = await fetch(`${API}/${productId}`);
+        const json = await res.json();
+        const p = json.data;
+        if (!p) throw new Error("not found");
+        renderProduct(p);
+
+        // Load related
+        const allRes = await fetch(`${API}?limit=50`);
+        const allJson = await allRes.json();
+        renderRelated(allJson.data || [], productId, p.category);
+      } catch(e) {
+        document.getElementById("productRoot").innerHTML = `<div class="loading">Product not found. <a href="index.html" style="opacity:0.6;text-decoration:underline">Back to shop →</a></div>`;
+      }
+    }
+
+    loadProduct();
+  </script>
+</body>
+</html>

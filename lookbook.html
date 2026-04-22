@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lookbook — MAVERICKS | F1 Apparel Drop 01</title>
+  <meta name="description" content="Browse the Mavericks Drop 01 lookbook. F1 team hoodies, leather jackets, caps, tees, and accessories — styled for the grid and the streets." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mavericks.com.bd/lookbook.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mavericks.com.bd/lookbook.html" />
+  <meta property="og:title" content="Lookbook — MAVERICKS | Drop 01" />
+  <meta property="og:description" content="Drop 01 lookbook. See how to wear Mavericks hoodies, crop tops, pants and shirts." />
+  <meta property="og:image" content="https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Montserrat",sans-serif;}
+    body{background:#050507;color:#fff;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+
+    nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;z-index:100;background:rgba(5,5,7,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .logo{font-size:22px;font-weight:900;letter-spacing:6px;}
+    .nav-links{display:flex;gap:22px;font-size:13px;text-transform:uppercase;letter-spacing:2px;}
+    .nav-links a{opacity:0.7;transition:opacity 0.2s;}
+    .nav-links a:hover,.nav-links a.active{opacity:1;}
+    .nav-links a.active{border-bottom:2px solid #fff;padding-bottom:2px;}
+
+    .page-hero{padding:140px 48px 60px;text-align:center;}
+    .page-hero h1{font-size:clamp(40px,7vw,80px);font-weight:900;letter-spacing:10px;}
+    .page-hero p{margin-top:14px;font-size:14px;letter-spacing:4px;text-transform:uppercase;opacity:0.4;}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 24px 100px;}
+
+    /* FILTER TABS */
+    .filter-bar{display:flex;gap:8px;justify-content:center;margin-bottom:48px;flex-wrap:wrap;}
+    .filter-btn{padding:8px 20px;border-radius:999px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:2px;cursor:pointer;transition:background 0.2s,border-color 0.2s,color 0.2s;font-family:inherit;}
+    .filter-btn:hover{border-color:rgba(255,255,255,0.4);}
+    .filter-btn.active{background:#fff;color:#000;border-color:#fff;}
+
+    /* MASONRY GRID */
+    .lookbook-grid{columns:3;column-gap:16px;}
+    .look-item{break-inside:avoid;margin-bottom:16px;position:relative;border-radius:16px;overflow:hidden;cursor:pointer;}
+    .look-item img{width:100%;display:block;transition:transform 0.5s ease;}
+    .look-item:hover img{transform:scale(1.04);}
+    .look-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,transparent 50%);opacity:0;transition:opacity 0.3s ease;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;}
+    .look-item:hover .look-overlay{opacity:1;}
+    .look-tag{font-size:10px;text-transform:uppercase;letter-spacing:2px;opacity:0.6;margin-bottom:4px;}
+    .look-name{font-size:14px;font-weight:800;letter-spacing:2px;}
+    .look-price{font-size:12px;opacity:0.7;margin-top:4px;}
+    .look-shop-btn{margin-top:10px;padding:7px 16px;border-radius:999px;background:#fff;color:#000;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;border:none;cursor:pointer;display:inline-block;width:fit-content;}
+
+    /* LIGHTBOX */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:500;display:none;align-items:center;justify-content:center;}
+    .lightbox.open{display:flex;}
+    .lightbox-inner{position:relative;max-width:700px;max-height:90vh;width:90%;}
+    .lightbox-inner img{width:100%;max-height:90vh;object-fit:contain;border-radius:12px;}
+    .lightbox-close{position:absolute;top:-40px;right:0;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;opacity:0.6;transition:opacity 0.2s;}
+    .lightbox-close:hover{opacity:1;}
+    .lightbox-info{margin-top:16px;display:flex;justify-content:space-between;align-items:center;}
+    .lightbox-name{font-size:16px;font-weight:800;letter-spacing:2px;}
+    .lightbox-shop{padding:10px 24px;border-radius:999px;background:#fff;color:#000;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2px;text-decoration:none;transition:background 0.2s;}
+    .lightbox-shop:hover{background:#e0e0e0;}
+
+    footer{padding:40px 48px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;font-size:12px;opacity:0.35;}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:900px){
+      nav{padding:14px 20px;}
+      .nav-links{display:none;}
+      .lookbook-grid{columns:2;}
+    }
+    @media(max-width:500px){
+      .lookbook-grid{columns:1;}
+      .page-hero{padding:120px 20px 40px;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">MAVERICKS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="lookbook.html" class="active">Lookbook</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <h1>LOOKBOOK</h1>
+    <p>Drop 01 — From the Grid to the Streets</p>
+  </div>
+
+  <div class="container">
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="hoodies">Hoodies</button>
+      <button class="filter-btn" data-filter="jackets">Jackets</button>
+      <button class="filter-btn" data-filter="caps">Caps</button>
+      <button class="filter-btn" data-filter="tees">Tees</button>
+      <button class="filter-btn" data-filter="accessories">Accessories</button>
+    </div>
+
+    <div class="lookbook-grid reveal" id="lookbookGrid">
+      <!-- Hoodies -->
+      <div class="look-item" data-cat="hoodies" onclick="openLight(this)">
+        <img src="https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop" alt="Team Hoodie Red Bull Navy" />
+        <div class="look-overlay">
+          <div class="look-tag">Hoodies</div>
+          <div class="look-name">Team Hoodie — Red Bull Navy</div>
+          <div class="look-price">$89</div>
+          <a href="index.html#hoodies" class="look-shop-btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="look-item" data-cat="hoodies" onclick="openLight(this)">
+        <img src="https://images.pexels.com/photos/5319493/pexels-photo-5319493.jpeg?auto=compress&cs=tinysrgb&w=600&h=700&fit=crop" alt="Team Hoodie Ferrari Red" />
+        <div class="look-overlay">
+          <div class="look-tag">Hoodies</div>
+          <div class="look-name">Team Hoodie — Ferrari Red</div>
+          <div class="look-price">$89</div>
+          <a href="index.html#hoodies" class="look-shop-btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="look-item" data-cat="jackets" onclick="openLight(this)">
+        <img src="https://images.pexels.com/photos/5236996/pexels-photo-5236996.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop" alt="Pit Lane Leather Jacket" />
+        <div class="look-overlay">
+          <div class="look-tag">Jackets</div>
+          <div class="look-name">Pit Lane Leather Jacket</div>
+          <div class="look-price">$149</div>
+          <a href="index.html#categories" class="look-shop-btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="look-item" data-cat="tees" onclick="openLight(this)">
+        <img src="https://images.pexels.com/photos/5493535/pexels-photo-5493535.jpeg?auto=compress&cs=tinysrgb&w=600&h=750&fit=crop" alt="Race Day Tee" />
+        <div class="look-overlay">
+          <div class="look-tag">Tees</div>
+          <div class="look-name">Race Day Tee — Statement Edition</div>
+          <div class="look-price">$39</div>
+          <a href="index.html#categories" class="look-shop-btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="look-item" data-cat="tees" onclick="openLight(this)">
+        <img src="https://images.pexels.com/photos/2008949/pexels-photo-2008949.jpeg?auto=compress&cs=tinysrgb&w=600&h=700&fit=crop" alt="Podium Polo" />
+        <div class="look-overlay">
+          <div class="look-tag">Tees</div>
+          <div class="look-name">Podium Polo — Ferrari Red</div>
+          <div class="look-price">$49</div>
+          <a href="index.html#categories" class="look-shop-btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="look-item" data-cat="hoodies" onclick="openLight(this)">
+        <img src="https://images.pexels.com/photos/5319577/pexels-photo-5319577.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop" alt="Team Hoodie McLaren Papaya" />
+        <div class="look-overlay">
+          <div class="look-tag">Hoodies</div>
+          <div class="look-name">Team Hoodie — McLaren Papaya</div>
+          <div class="look-price">$89</div>
+          <a href="index.html#hoodies" class="look-shop-btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="look-item" data-cat="jackets" onclick="openLight(this)">
+        <img src="https://images.pexels.com/photos/5319577/pexels-photo-5319577.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop" alt="Starting Grid Bomber" />
+        <div class="look-overlay">
+          <div class="look-tag">Jackets</div>
+          <div class="look-name">Starting Grid Bomber — Onyx</div>
+          <div class="look-price">$119</div>
+          <a href="index.html#categories" class="look-shop-btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="look-item" data-cat="caps" onclick="openLight(this)">
+        <img src="https://images.pexels.com/photos/5899133/pexels-photo-5899133.jpeg?auto=compress&cs=tinysrgb&w=600&h=700&fit=crop" alt="Paddock Club Cap" />
+        <div class="look-overlay">
+          <div class="look-tag">Caps</div>
+          <div class="look-name">Paddock Club Cap — Structured</div>
+          <div class="look-price">$29</div>
+          <a href="index.html#categories" class="look-shop-btn">Shop Now</a>
+        </div>
+      </div>
+      <div class="look-item" data-cat="accessories" onclick="openLight(this)">
+        <img src="https://images.pexels.com/photos/5319298/pexels-photo-5319298.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop" alt="Pit Wall Scarf" />
+        <div class="look-overlay">
+          <div class="look-tag">Accessories</div>
+          <div class="look-name">Pit Wall Scarf — Ferrari Red</div>
+          <div class="look-price">$19</div>
+          <a href="index.html#categories" class="look-shop-btn">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLight(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightDirect()">✕</button>
+      <img id="lightboxImg" src="" alt="" />
+      <div class="lightbox-info">
+        <div class="lightbox-name" id="lightboxName"></div>
+        <a href="index.html#hoodies" class="lightbox-shop">Shop Now</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>© <span id="year"></span> Mavericks Studio</span>
+    <span>Hotter Than Yesterday</span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // FILTER
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const filter = btn.dataset.filter;
+        document.querySelectorAll(".look-item").forEach(item => {
+          item.style.display = (filter === "all" || item.dataset.cat === filter) ? "block" : "none";
+        });
+      });
+    });
+
+    // LIGHTBOX
+    function openLight(el) {
+      const img  = el.querySelector("img");
+      const name = el.querySelector(".look-name").textContent;
+      document.getElementById("lightboxImg").src = img.src;
+      document.getElementById("lightboxName").textContent = name;
+      document.getElementById("lightbox").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeLight(e) {
+      if (e.target === document.getElementById("lightbox")) closeLightDirect();
+    }
+    function closeLightDirect() {
+      document.getElementById("lightbox").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target);} }), {threshold:0.1});
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

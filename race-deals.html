@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Race Deals — MAVERICKS | Limited Drops & Weekend Offers</title>
+  <meta name="description" content="Limited edition F1 apparel and race weekend deals. Verstappen, Hamilton, Norris and more — only while stock lasts." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Montserrat",sans-serif;}
+    body{background:#050507;color:#fff;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+
+    nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;z-index:100;background:rgba(5,5,7,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .logo{font-size:22px;font-weight:900;letter-spacing:6px;}
+    .nav-links{display:flex;gap:22px;font-size:13px;text-transform:uppercase;letter-spacing:2px;}
+    .nav-links a{opacity:0.7;transition:opacity 0.2s;}
+    .nav-links a:hover,.nav-links a.active{opacity:1;}
+    .nav-links a.active{border-bottom:2px solid #fff;padding-bottom:2px;}
+
+    /* RACE WEEKEND BANNER */
+    .race-banner{
+      position:fixed;top:73px;left:0;width:100%;z-index:90;
+      background:linear-gradient(90deg,#e8002d,#ff8000,#e8002d);
+      background-size:200% 100%;animation:flagAnim 3s linear infinite;
+      padding:8px 0;text-align:center;font-size:11px;font-weight:800;
+      letter-spacing:4px;text-transform:uppercase;color:#fff;
+      opacity:0;transition:opacity 0.4s;pointer-events:none;
+    }
+    .race-banner.active{opacity:1;pointer-events:auto;}
+    @keyframes flagAnim{0%{background-position:0% 0%}100%{background-position:200% 0%}}
+
+    /* PAGE HERO */
+    .page-hero{padding:150px 48px 60px;text-align:center;position:relative;}
+    .page-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(232,0,45,0.12),transparent 60%);}
+    .hero-label{font-size:11px;text-transform:uppercase;letter-spacing:4px;opacity:0.4;margin-bottom:16px;position:relative;}
+    .page-hero h1{font-size:clamp(44px,8vw,90px);font-weight:900;letter-spacing:12px;position:relative;}
+    .hero-sub{margin-top:14px;font-size:14px;letter-spacing:3px;text-transform:uppercase;opacity:0.4;position:relative;}
+
+    /* STATS BAR */
+    .stats-bar{display:flex;justify-content:center;gap:48px;padding:24px 48px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:0;}
+    .stat-item{text-align:center;}
+    .stat-num{font-size:24px;font-weight:900;letter-spacing:2px;color:#e8002d;}
+    .stat-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;opacity:0.4;margin-top:2px;}
+
+    /* TABS */
+    .tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:0 48px;max-width:1200px;margin:40px auto 0;}
+    .tab-btn{padding:14px 24px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;opacity:0.4;cursor:pointer;border-bottom:2px solid transparent;transition:opacity 0.2s,border-color 0.2s;background:none;border-left:none;border-right:none;border-top:none;color:#fff;font-family:inherit;}
+    .tab-btn.active{opacity:1;border-bottom-color:#e8002d;}
+    .tab-btn:hover{opacity:0.8;}
+
+    /* CONTAINER */
+    .container{max-width:1200px;margin:0 auto;padding:40px 24px 100px;}
+
+    /* FILTER ROW */
+    .filter-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;align-items:center;}
+    .filter-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.35;margin-right:4px;}
+    .chip{padding:7px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.2s;font-family:inherit;}
+    .chip:hover{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.04);}
+    .chip.active{background:#e8002d;border-color:#e8002d;color:#fff;}
+
+    /* PRODUCT GRID */
+    .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+
+    .product-card{
+      border-radius:20px;border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.02);overflow:hidden;
+      cursor:pointer;transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;
+      position:relative;
+    }
+    .product-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,0.2);box-shadow:0 0 24px rgba(232,0,45,0.12);}
+    .product-card.fan-team-match{border-color:var(--fan-accent,rgba(255,255,255,0.2));box-shadow:0 0 20px var(--fan-glow,rgba(255,255,255,0.05));}
+
+    .product-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#111;}
+    .product-img-placeholder{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#111,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;opacity:0.15;letter-spacing:-2px;}
+
+    /* BADGES */
+    .badge-row{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap;}
+    .badge{padding:3px 8px;border-radius:4px;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
+    .badge-limited{background:#e8002d;color:#fff;}
+    .badge-sale{background:#ff8000;color:#fff;}
+    .badge-new{background:#00d2be;color:#000;}
+    .badge-driver{background:#7c3aed;color:#fff;}
+
+    /* PRODUCT INFO */
+    .product-info{padding:16px;}
+    .product-name{font-size:13px;font-weight:800;letter-spacing:1px;line-height:1.3;}
+    .product-team{font-size:10px;opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-top:3px;}
+    .price-row{display:flex;align-items:center;gap:8px;margin-top:10px;}
+    .price-original{font-size:12px;opacity:0.3;text-decoration:line-through;}
+    .price-current{font-size:16px;font-weight:900;color:#fff;}
+    .price-current.discounted{color:#ff8000;}
+    .price-savings{font-size:10px;color:#52e252;font-weight:700;letter-spacing:1px;}
+
+    .btn-shop{width:100%;margin-top:12px;padding:10px 0;border-radius:999px;background:#e8002d;color:#fff;border:none;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;cursor:pointer;font-family:inherit;transition:opacity 0.2s,transform 0.2s;}
+    .btn-shop:hover{opacity:0.85;transform:translateY(-1px);}
+
+    /* EMPTY STATE */
+    .empty-state{text-align:center;padding:80px 24px;opacity:0.3;}
+    .empty-state p{font-size:14px;text-transform:uppercase;letter-spacing:3px;margin-top:12px;}
+
+    /* RACE WEEKEND TOGGLE */
+    .race-toggle{
+      position:fixed;bottom:28px;right:28px;z-index:200;
+      padding:12px 22px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.15);
+      background:rgba(10,10,12,0.92);backdrop-filter:blur(12px);
+      color:#fff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;
+      cursor:pointer;font-family:inherit;transition:all 0.3s;
+      display:flex;align-items:center;gap:8px;
+    }
+    .race-toggle:hover{border-color:rgba(232,0,45,0.5);}
+    .race-toggle.on{background:linear-gradient(90deg,#e8002d,#ff8000);border-color:transparent;}
+    .race-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.3);}
+    .race-toggle.on .race-dot{background:#fff;box-shadow:0 0 6px #fff;}
+
+    /* COUNTDOWN */
+    .deal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px;}
+    .deal-count{font-size:13px;opacity:0.4;text-transform:uppercase;letter-spacing:2px;}
+    .race-mode-pill{padding:6px 16px;border-radius:999px;background:rgba(232,0,45,0.15);border:1px solid rgba(232,0,45,0.3);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:#e8002d;display:none;}
+    .race-mode-pill.active{display:inline-block;}
+
+    footer{padding:40px 48px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;font-size:12px;opacity:0.35;}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:960px){nav{padding:14px 20px;}.nav-links{display:none;}.products-grid{grid-template-columns:1fr 1fr;}.tabs{padding:0 20px;}.page-hero{padding:130px 20px 40px;}.stats-bar{gap:24px;padding:20px;}.filter-row{padding:0 4px;}}
+    @media(max-width:500px){.products-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">MAVERICKS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="teams.html">Teams</a>
+      <a href="drivers.html">Drivers</a>
+      <a href="fan-mode.html">Fan Mode</a>
+      <a href="race-deals.html" class="active">Race Deals</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="race-banner" id="raceBanner">Race Weekend Mode Active — Extra 5% Off All Orders</div>
+
+  <div class="page-hero">
+    <div class="hero-label">Limited Editions & Weekend Offers</div>
+    <h1>RACE<br/>DEALS</h1>
+    <p class="hero-sub">Only while stock lasts</p>
+  </div>
+
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-item"><div class="stat-num" id="statLimited">—</div><div class="stat-label">Limited Items</div></div>
+    <div class="stat-item"><div class="stat-num" id="statSale">—</div><div class="stat-label">On Sale</div></div>
+    <div class="stat-item"><div class="stat-num" id="statTeams">9</div><div class="stat-label">F1 Teams</div></div>
+    <div class="stat-item"><div class="stat-num">2026</div><div class="stat-label">Season Drop</div></div>
+  </div>
+
+  <div class="tabs" id="tabsRow">
+    <button class="tab-btn active" data-tab="all">All Deals</button>
+    <button class="tab-btn" data-tab="limited">Limited Only</button>
+    <button class="tab-btn" data-tab="sale">On Sale</button>
+    <button class="tab-btn" data-tab="driver">Driver Edition</button>
+  </div>
+
+  <div class="container">
+    <div class="filter-row" id="filterRow">
+      <span class="filter-label">Team:</span>
+      <button class="chip active" data-team="">All Teams</button>
+      <button class="chip" data-team="Red Bull Racing">Red Bull</button>
+      <button class="chip" data-team="Ferrari">Ferrari</button>
+      <button class="chip" data-team="McLaren">McLaren</button>
+      <button class="chip" data-team="Mercedes-AMG Petronas">Mercedes</button>
+      <button class="chip" data-team="Aston Martin">Aston Martin</button>
+    </div>
+
+    <div class="deal-header">
+      <div class="deal-count" id="dealCount">Loading deals...</div>
+      <div class="race-mode-pill" id="raceModePill">Race Weekend Pricing Active</div>
+    </div>
+
+    <div class="products-grid" id="dealsGrid"></div>
+  </div>
+
+  <footer>
+    <span>© <span id="year"></span> Mavericks Studio</span>
+    <span>Hotter Than Yesterday</span>
+  </footer>
+
+  <button class="race-toggle" id="raceToggle" onclick="toggleRaceWeekend()">
+    <span class="race-dot"></span>
+    <span id="raceToggleLabel">Race Mode</span>
+  </button>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const API = "http://localhost:8080/api/products";
+    const CARD_IMGS = {
+      p1:"https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p2:"https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p3:"https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p4:"https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p5:"https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p6:"https://images.pexels.com/photos/3622614/pexels-photo-3622614.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p7:"https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p16:"https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p17:"https://images.pexels.com/photos/5699102/pexels-photo-5699102.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p18:"https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=600",
+      p19:"https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=600",
+    };
+
+    const TEAM_COLORS = {
+      "Red Bull Racing":"#1e41ff","Ferrari":"#e8002d","Mercedes-AMG Petronas":"#00d2be",
+      "McLaren":"#ff8000","Aston Martin":"#006f62","Alpine":"#0093cc",
+      "Williams":"#005aff","Haas":"#b6babd","Stake Sauber":"#52e252"
+    };
+
+    let allDeals = [];
+    let activeTab = "all";
+    let activeTeam = "";
+    let raceWeekend = localStorage.getItem("mv_race_weekend") === "true";
+
+    // Fan mode
+    const fanTeam = localStorage.getItem("mv_fan_team") || "";
+    if (fanTeam && TEAM_COLORS[fanTeam]) {
+      document.documentElement.style.setProperty("--fan-accent", TEAM_COLORS[fanTeam]);
+    }
+
+    function applyRaceWeekend() {
+      const btn = document.getElementById("raceToggle");
+      const banner = document.getElementById("raceBanner");
+      const pill = document.getElementById("raceModePill");
+      if (raceWeekend) {
+        btn.classList.add("on");
+        banner.classList.add("active");
+        pill.classList.add("active");
+        document.getElementById("raceToggleLabel").textContent = "Race Mode ON";
+      } else {
+        btn.classList.remove("on");
+        banner.classList.remove("active");
+        pill.classList.remove("active");
+        document.getElementById("raceToggleLabel").textContent = "Race Mode";
+      }
+    }
+
+    function toggleRaceWeekend() {
+      raceWeekend = !raceWeekend;
+      localStorage.setItem("mv_race_weekend", raceWeekend);
+      applyRaceWeekend();
+      renderDeals();
+    }
+
+    function getFilteredDeals() {
+      let result = allDeals;
+      if (activeTab === "limited") result = result.filter(p => p.limited);
+      else if (activeTab === "sale")    result = result.filter(p => p.discount > 0);
+      else if (activeTab === "driver")  result = result.filter(p => p.driver && p.driver.trim() !== "");
+      if (activeTeam) result = result.filter(p => p.team === activeTeam);
+      return result;
+    }
+
+    function renderDeals() {
+      const list = getFilteredDeals();
+      const grid = document.getElementById("dealsGrid");
+      const countEl = document.getElementById("dealCount");
+
+      countEl.textContent = list.length + " deal" + (list.length !== 1 ? "s" : "") + " found";
+
+      if (list.length === 0) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div style="font-size:48px;opacity:0.2">🏁</div><p>No deals match this filter</p></div>`;
+        return;
+      }
+
+      grid.innerHTML = list.map(p => {
+        const imgSrc = CARD_IMGS[p.id] || CARD_IMGS.p2;
+        const isMatch = fanTeam && p.team === fanTeam;
+        const teamColor = TEAM_COLORS[p.team] || "#fff";
+
+        let basePrice = p.price;
+        let finalDiscount = p.discount || 0;
+        if (raceWeekend) finalDiscount = Math.min(finalDiscount + 5, 60);
+        const finalPrice = finalDiscount > 0 ? basePrice * (1 - finalDiscount / 100) : basePrice;
+        const savings = finalDiscount > 0 ? (basePrice - finalPrice).toFixed(0) : 0;
+
+        const badges = [];
+        if (p.limited)  badges.push(`<span class="badge badge-limited">Limited</span>`);
+        if (finalDiscount > 0) badges.push(`<span class="badge badge-sale">-${Math.round(finalDiscount)}%</span>`);
+        if (p.newDrop)  badges.push(`<span class="badge badge-new">New</span>`);
+        if (p.driver && p.driver.trim()) badges.push(`<span class="badge badge-driver">${p.driver.split(" ")[1] || p.driver}</span>`);
+
+        return `
+          <div class="product-card reveal ${isMatch ? 'fan-team-match' : ''}" style="${isMatch ? `--fan-accent:${teamColor};--fan-glow:${teamColor}33;` : ''}">
+            <div class="badge-row">${badges.join("")}</div>
+            <img class="product-img" src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="product-img-placeholder" style="display:none">${p.id.toUpperCase()}</div>
+            <div class="product-info">
+              <div class="product-name">${p.name}</div>
+              <div class="product-team" style="color:${teamColor};opacity:0.7">${p.team || p.category}</div>
+              <div class="price-row">
+                ${finalDiscount > 0 ? `<span class="price-original">৳${basePrice.toLocaleString()}</span>` : ""}
+                <span class="price-current ${finalDiscount > 0 ? 'discounted' : ''}">৳${Math.round(finalPrice).toLocaleString()}</span>
+                ${savings > 0 ? `<span class="price-savings">Save ৳${savings}</span>` : ""}
+              </div>
+              ${p.driver ? `<div style="font-size:10px;opacity:0.4;margin-top:6px;letter-spacing:1px;text-transform:uppercase;">${p.driver}</div>` : ""}
+              <button class="btn-shop" onclick="shopProduct('${p.id}','${p.team || ""}')">Shop Now</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      // reveal animation
+      const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target);} }), {threshold:0.05});
+      document.querySelectorAll(".reveal:not(.visible)").forEach(el => obs.observe(el));
+    }
+
+    function shopProduct(id, team) {
+      if (team) localStorage.setItem("mv_fan_team", team);
+      window.location = "index.html#categories";
+    }
+
+    async function loadDeals() {
+      try {
+        const res = await fetch(`${API}?limit=100`);
+        const json = await res.json();
+        const products = json.data || [];
+        // Show only deals: limited OR discount > 0
+        allDeals = products.filter(p => p.limited || (p.discount && p.discount > 0));
+
+        // Update stats
+        document.getElementById("statLimited").textContent = products.filter(p => p.limited).length;
+        document.getElementById("statSale").textContent = products.filter(p => p.discount > 0).length;
+
+        renderDeals();
+      } catch (e) {
+        // Offline fallback — show placeholder deals
+        allDeals = [
+          { id:"p16", name:"Max 33 Race Tee", category:"t-shirts", team:"Red Bull Racing", driver:"Max Verstappen", price:1290, discount:0, limited:true, newDrop:true, edition:"limited" },
+          { id:"p3",  name:"Pit Lane Leather Jacket", category:"jackets", team:"Ferrari", driver:"", price:6490, discount:0, limited:true, newDrop:false, edition:"premium" },
+          { id:"p5",  name:"Starting Grid Bomber", category:"jackets", team:"Red Bull Racing", driver:"", price:4990, discount:0, limited:true, newDrop:false, edition:"limited" },
+          { id:"p18", name:"Norris 4 McLaren Bomber", category:"jackets", team:"McLaren", driver:"Lando Norris", price:5490, discount:0, limited:true, newDrop:true, edition:"premium" },
+          { id:"p19", name:"Hamilton 44 Legacy Tee", category:"t-shirts", team:"Mercedes-AMG Petronas", driver:"Lewis Hamilton", price:1490, discount:10, limited:true, newDrop:false, edition:"limited" },
+          { id:"p17", name:"Leclerc 16 Fan Hoodie", category:"hoodies", team:"Ferrari", driver:"Charles Leclerc", price:3290, discount:0, limited:false, newDrop:true, edition:"fan" },
+        ];
+        document.getElementById("statLimited").textContent = allDeals.filter(p => p.limited).length;
+        document.getElementById("statSale").textContent = allDeals.filter(p => p.discount > 0).length;
+        renderDeals();
+      }
+    }
+
+    // Tab switching
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeTab = btn.dataset.tab;
+        renderDeals();
+      });
+    });
+
+    // Team chip filtering
+    document.querySelectorAll(".chip[data-team]").forEach(chip => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll(".chip[data-team]").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        activeTeam = chip.dataset.team;
+        renderDeals();
+      });
+    });
+
+    applyRaceWeekend();
+    loadDeals();
+  </script>
+</body>
+</html>

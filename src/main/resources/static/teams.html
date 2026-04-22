@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1 Teams — MAVERICKS | Shop by Team</title>
+  <meta name="description" content="Shop Mavericks F1 apparel by team. Red Bull, Ferrari, McLaren, Mercedes, Aston Martin, Alpine, Williams, Haas, Stake Sauber." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Montserrat",sans-serif;}
+    body{background:#050507;color:#fff;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+
+    nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;z-index:100;background:rgba(5,5,7,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .logo{font-size:22px;font-weight:900;letter-spacing:6px;}
+    .nav-links{display:flex;gap:22px;font-size:13px;text-transform:uppercase;letter-spacing:2px;}
+    .nav-links a{opacity:0.7;transition:opacity 0.2s;}
+    .nav-links a:hover,.nav-links a.active{opacity:1;}
+    .nav-links a.active{border-bottom:2px solid #fff;padding-bottom:2px;}
+
+    .page-hero{padding:140px 48px 60px;text-align:center;position:relative;}
+    .page-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(255,0,60,0.1),transparent 60%);}
+    .page-hero h1{font-size:clamp(44px,8vw,90px);font-weight:900;letter-spacing:12px;position:relative;}
+    .page-hero p{margin-top:14px;font-size:14px;letter-spacing:4px;text-transform:uppercase;opacity:0.4;position:relative;}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 24px 100px;}
+
+    .teams-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px;}
+
+    .team-card{
+      border-radius:24px;border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.02);overflow:hidden;
+      cursor:pointer;transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;
+    }
+    .team-card:hover{transform:translateY(-6px);border-color:var(--tc,rgba(255,255,255,0.3));box-shadow:0 0 30px var(--tg,rgba(255,255,255,0.1));}
+    .team-banner{height:6px;background:var(--tc,#888);}
+    .team-body{padding:28px 24px 24px;}
+    .team-name{font-size:18px;font-weight:900;letter-spacing:3px;text-transform:uppercase;}
+    .team-drivers{font-size:12px;opacity:0.4;text-transform:uppercase;letter-spacing:2px;margin-top:6px;}
+    .team-stats{display:flex;gap:20px;margin-top:20px;}
+    .team-stat{font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.5;}
+    .team-stat strong{display:block;font-size:20px;font-weight:900;opacity:1;color:var(--tc,#fff);margin-bottom:4px;}
+    .team-actions{display:flex;gap:10px;margin-top:22px;}
+    .btn-team{flex:1;padding:10px 0;border-radius:999px;border:1px solid var(--tc,rgba(255,255,255,0.3));background:transparent;color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;cursor:pointer;font-family:inherit;transition:background 0.2s;}
+    .btn-team:hover{background:var(--tc,rgba(255,255,255,0.1));}
+    .btn-team.primary{background:var(--tc,#fff);color:#000;border-color:var(--tc,#fff);}
+    .btn-team.primary:hover{opacity:0.85;}
+
+    footer{padding:40px 48px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;font-size:12px;opacity:0.35;}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:900px){nav{padding:14px 20px;}.nav-links{display:none;}.teams-grid{grid-template-columns:1fr 1fr;}.page-hero{padding:120px 20px 40px;}}
+    @media(max-width:500px){.teams-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">MAVERICKS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="teams.html" class="active">Teams</a>
+      <a href="drivers.html">Drivers</a>
+      <a href="fan-mode.html">Fan Mode</a>
+      <a href="race-deals.html">Race Deals</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <h1>TEAMS</h1>
+    <p>Pick your side. Wear it with pride.</p>
+  </div>
+
+  <div class="container">
+    <div class="teams-grid" id="teamsGrid">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+
+  <footer>
+    <span>© <span id="year"></span> Mavericks Studio</span>
+    <span>Hotter Than Yesterday</span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const TEAMS = [
+      { name:"Red Bull Racing",       color:"#1e41ff", glow:"rgba(30,65,255,0.3)",   drivers:"Verstappen · Pérez",    wc:"6 Constructors' Titles",  products:"3" },
+      { name:"Ferrari",               color:"#e8002d", glow:"rgba(232,0,45,0.3)",    drivers:"Leclerc · Sainz",       wc:"16 Constructors' Titles", products:"4" },
+      { name:"Mercedes-AMG Petronas", color:"#00d2be", glow:"rgba(0,210,190,0.3)",   drivers:"Hamilton · Russell",    wc:"8 Constructors' Titles",  products:"3" },
+      { name:"McLaren",               color:"#ff8000", glow:"rgba(255,128,0,0.3)",   drivers:"Norris · Piastri",      wc:"8 Constructors' Titles",  products:"3" },
+      { name:"Aston Martin",          color:"#006f62", glow:"rgba(0,111,98,0.3)",    drivers:"Alonso · Stroll",       wc:"0 Constructors' Titles",  products:"2" },
+      { name:"Alpine",                color:"#0093cc", glow:"rgba(0,147,204,0.3)",   drivers:"Gasly · Doohan",        wc:"2 Constructors' Titles",  products:"2" },
+      { name:"Williams",              color:"#005aff", glow:"rgba(0,90,255,0.3)",    drivers:"Albon · Sainz",         wc:"9 Constructors' Titles",  products:"2" },
+      { name:"Haas",                  color:"#b6babd", glow:"rgba(182,186,189,0.3)", drivers:"Bearman · Ocon",        wc:"0 Constructors' Titles",  products:"2" },
+      { name:"Stake Sauber",          color:"#52e252", glow:"rgba(82,226,82,0.3)",   drivers:"Hülkenberg · Bortoleto",wc:"0 Constructors' Titles",  products:"2" },
+    ];
+
+    const grid = document.getElementById("teamsGrid");
+    grid.innerHTML = TEAMS.map(t => `
+      <div class="team-card reveal" style="--tc:${t.color};--tg:${t.glow}">
+        <div class="team-banner"></div>
+        <div class="team-body">
+          <div class="team-name">${t.name}</div>
+          <div class="team-drivers">${t.drivers}</div>
+          <div class="team-stats">
+            <div class="team-stat"><strong>${t.products}</strong>Products</div>
+            <div class="team-stat"><strong>2026</strong>Season</div>
+          </div>
+          <div class="team-actions">
+            <button class="btn-team primary" onclick="shopTeam('${t.name}')">Shop Now</button>
+            <button class="btn-team" onclick="setFanTeam('${t.name}')">My Team</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+
+    function shopTeam(team) {
+      localStorage.setItem("mv_fan_team", team);
+      window.location = "index.html#categories";
+    }
+    function setFanTeam(team) {
+      localStorage.setItem("mv_fan_team", team);
+      localStorage.setItem("mv_fan_driver", "");
+      alert("✓ " + team + " set as your team! Fan mode activated.");
+    }
+
+    const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target);} }), {threshold:0.1});
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
