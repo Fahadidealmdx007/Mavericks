@@ -1619,6 +1619,58 @@
     .newsletter-form button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
     .newsletter-fine { margin-top: 14px; font-size: 11px; opacity: 0.3; letter-spacing: 1px; }
 
+    /* ── PRODUCT QUICK-VIEW MODAL ── */
+    .qv-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(8px);
+      z-index: 350;
+      display: none; align-items: center; justify-content: center;
+    }
+    .qv-backdrop.open { display: flex; }
+    .qv-modal {
+      background: #0e0e14;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 28px;
+      width: 90%; max-width: 860px;
+      max-height: 90vh; overflow-y: auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .qv-modal::-webkit-scrollbar { width: 4px; }
+    .qv-modal::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+    .qv-img-col {
+      border-radius: 28px 0 0 28px; overflow: hidden;
+      background: #12121a; min-height: 400px;
+    }
+    .qv-img-col img { width: 100%; height: 100%; object-fit: cover; }
+    .qv-info-col { padding: 36px 32px; display: flex; flex-direction: column; gap: 20px; }
+    .qv-close {
+      align-self: flex-end; background: none; border: none; color: #fff;
+      font-size: 20px; cursor: pointer; opacity: 0.5; transition: opacity 0.2s;
+      margin-bottom: -8px;
+    }
+    .qv-close:hover { opacity: 1; }
+    .qv-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.45; }
+    .qv-name { font-size: 26px; font-weight: 900; letter-spacing: 2px; }
+    .qv-price { font-size: 20px; font-weight: 800; }
+    .qv-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 0; }
+    .qv-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.5; margin-bottom: 10px; }
+    .qv-color-dots { display: flex; gap: 10px; flex-wrap: wrap; }
+    .qv-size-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .qv-add-btn {
+      margin-top: auto; width: 100%; padding: 14px 0;
+      border-radius: 999px; border: 1px solid #fff;
+      background: #fff; color: #000;
+      font-size: 13px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 2px;
+      cursor: pointer; transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .qv-add-btn:hover { background: #000; color: #fff; transform: translateY(-2px); }
+    @media (max-width: 680px) {
+      .qv-modal { grid-template-columns: 1fr; }
+      .qv-img-col { border-radius: 28px 28px 0 0; min-height: 260px; }
+    }
+
     /* ── REVEAL ── */
     .reveal {
       opacity: 0;
@@ -1829,25 +1881,21 @@
     <div class="section-inner">
       <div class="reveal" style="margin-bottom: 40px;">
         <div class="section-label">Drop 01 · Hoodies</div>
-        <div class="section-title">Double Zipper Hoodies</div>
-        <p class="section-copy">
+        <div class="section-title" id="hoodieTitle">Double Zipper Hoodies</div>
+        <p class="section-copy" id="hoodieDescription">
           Built for late-night city runs and studio sessions. Heavy, soft, and loud.
           Switch between Onyx, Crimson, and Emerald — or let autoplay flex them for you.
         </p>
 
-        <div class="pill-row">
+        <div class="pill-row" id="hoodieMetaPills">
           <div class="pill">Oversized fit</div>
           <div class="pill">Heavyweight fleece</div>
           <div class="pill">Unisex sizing</div>
         </div>
 
         <div class="color-picker">
-          <span class="color-label">Color</span>
-          <div class="color-dots">
-            <button class="color-dot active" data-variant="0" style="--dot-color:#111;" aria-label="Onyx"></button>
-            <button class="color-dot" data-variant="1" style="--dot-color:#b02a2a;" aria-label="Crimson"></button>
-            <button class="color-dot" data-variant="2" style="--dot-color:#0b6b5a;" aria-label="Emerald"></button>
-          </div>
+          <span class="color-label">Color: <span id="selectedColorName">—</span></span>
+          <div class="color-dots" id="colorDotsContainer"></div>
         </div>
 
         <div class="size-picker">
@@ -1855,14 +1903,7 @@
             <span>Select Size</span>
             <span class="size-guide-link" id="sizeGuideBtn">Size Guide</span>
           </div>
-          <div class="size-buttons">
-            <button class="size-btn" data-size="XS">XS</button>
-            <button class="size-btn" data-size="S">S</button>
-            <button class="size-btn selected" data-size="M">M</button>
-            <button class="size-btn" data-size="L">L</button>
-            <button class="size-btn" data-size="XL">XL</button>
-            <button class="size-btn sold-out" data-size="XXL" disabled>XXL</button>
-          </div>
+          <div class="size-buttons" id="sizeBtnsContainer"></div>
         </div>
 
         <button class="add-cart-btn" id="addCartBtn">Add to Cart — $89</button>
@@ -1893,51 +1934,15 @@
         </p>
       </div>
 
-      <div class="product-grid">
+      <div class="product-grid" id="productsGrid">
         <div class="card reveal">
-          <div class="card-tag">Core</div>
-          <div class="card-title">Hoodies</div>
+          <div class="card-tag">Loading</div>
+          <div class="card-title">Collections</div>
           <div class="card-media">
-            <img src="https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks hoodies" />
+            <img src="https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Loading collections" />
           </div>
           <div class="card-footer">
-            <span>Drop 01 · 3 colors</span>
-            <span class="chip-small">Shop</span>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <div class="card-tag">Edit</div>
-          <div class="card-title">Crop Tops</div>
-          <div class="card-media">
-            <img src="https://images.pexels.com/photos/5319298/pexels-photo-5319298.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks crop tops" />
-          </div>
-          <div class="card-footer">
-            <span>Layered & bold</span>
-            <span class="chip-small">Shop</span>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <div class="card-tag">Movement</div>
-          <div class="card-title">Baggy Pants</div>
-          <div class="card-media">
-            <img src="https://images.pexels.com/photos/5236996/pexels-photo-5236996.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks baggy pants" />
-          </div>
-          <div class="card-footer">
-            <span>Street comfort</span>
-            <span class="chip-small">Shop</span>
-          </div>
-        </div>
-
-        <div class="card reveal">
-          <div class="card-tag">Typography</div>
-          <div class="card-title">Shirts</div>
-          <div class="card-media">
-            <img src="https://images.pexels.com/photos/5493535/pexels-photo-5493535.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop" alt="Mavericks shirts" />
-          </div>
-          <div class="card-footer">
-            <span>Statement prints</span>
+            <span>Fetching catalog…</span>
             <span class="chip-small">Shop</span>
           </div>
         </div>
@@ -2276,6 +2281,31 @@
     </div>
   </div>
 
+  <!-- PRODUCT QUICK-VIEW MODAL -->
+  <div class="qv-backdrop" id="qvBackdrop" onclick="closeQV(event)">
+    <div class="qv-modal" id="qvModal">
+      <div class="qv-img-col">
+        <img id="qvImg" src="" alt="" />
+      </div>
+      <div class="qv-info-col">
+        <button class="qv-close" onclick="closeQVDirect()">✕</button>
+        <div class="qv-tag" id="qvTag"></div>
+        <div class="qv-name" id="qvName"></div>
+        <div class="qv-price" id="qvPrice"></div>
+        <hr class="qv-divider" />
+        <div>
+          <div class="qv-label">Color: <span id="qvColorName" style="opacity:1;text-transform:none;letter-spacing:0;font-size:12px;">—</span></div>
+          <div class="qv-color-dots" id="qvColorDots"></div>
+        </div>
+        <div>
+          <div class="qv-label">Size</div>
+          <div class="qv-size-btns" id="qvSizeBtns"></div>
+        </div>
+        <button class="qv-add-btn" id="qvAddBtn">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
   <!-- SIZE GUIDE MODAL -->
   <div class="modal-backdrop" id="sizeModal">
     <div class="modal">
@@ -2346,19 +2376,55 @@
       });
     });
 
-    // ── HOODIE COLOR VARIANTS ──
-    const hoodieVariants = [
-      { name: "Onyx",    img: "https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop",  bg: "radial-gradient(circle at top, #222, #050507)" },
-      { name: "Crimson", img: "https://images.pexels.com/photos/5319493/pexels-photo-5319493.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop", bg: "radial-gradient(circle at top, #4a0000, #100000)" },
-      { name: "Emerald", img: "https://images.pexels.com/photos/5319577/pexels-photo-5319577.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop", bg: "radial-gradient(circle at top, #004534, #001410)" }
-    ];
+    // ── COLOR / IMAGE LOOKUP TABLES ──
+    const COLOR_HEX = {
+      Onyx: '#111', Black: '#111',
+      Crimson: '#b02a2a', Red: '#c0392b',
+      Emerald: '#0b6b5a', Green: '#1a6b3a',
+      White: '#f0f0f0', Navy: '#0a1628',
+      Grey: '#888', Gray: '#888'
+    };
+    const COLOR_BG = {
+      Onyx:    'radial-gradient(circle at top, #222, #050507)',
+      Crimson: 'radial-gradient(circle at top, #4a0000, #100000)',
+      Emerald: 'radial-gradient(circle at top, #004534, #001410)',
+    };
+    const PRODUCT_IMGS = {
+      p1: { Onyx: 'https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop', Crimson: 'https://images.pexels.com/photos/5319493/pexels-photo-5319493.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop', Emerald: 'https://images.pexels.com/photos/5319577/pexels-photo-5319577.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop' },
+      p2: { default: 'https://images.pexels.com/photos/5319298/pexels-photo-5319298.jpeg?auto=compress&cs=tinysrgb&w=480&h=600&fit=crop' },
+      p3: { default: 'https://images.pexels.com/photos/5236996/pexels-photo-5236996.jpeg?auto=compress&cs=tinysrgb&w=480&h=600&fit=crop' },
+      p4: { default: 'https://images.pexels.com/photos/5493535/pexels-photo-5493535.jpeg?auto=compress&cs=tinysrgb&w=480&h=600&fit=crop' },
+    };
+    const CARD_IMGS = {
+      p1: 'https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop',
+      p2: 'https://images.pexels.com/photos/5319298/pexels-photo-5319298.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop',
+      p3: 'https://images.pexels.com/photos/5236996/pexels-photo-5236996.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop',
+      p4: 'https://images.pexels.com/photos/5493535/pexels-photo-5493535.jpeg?auto=compress&cs=tinysrgb&w=480&h=360&fit=crop',
+    };
 
-    const hoodieImg = document.getElementById("hoodie-image");
-    const hoodieBg  = document.getElementById("hoodie-bg");
-    const colorDots = document.querySelectorAll(".color-dot");
+    // API returns colors/sizes as "A,B,C" strings — normalize to arrays
+    function toArr(val) {
+      if (!val) return [];
+      if (Array.isArray(val)) return val;
+      return val.split(',').map(s => s.trim()).filter(Boolean);
+    }
+
+    function getProductImg(productId, colorName) {
+      const map = PRODUCT_IMGS[productId] || {};
+      return map[colorName] || map.default || CARD_IMGS[productId] || CARD_IMGS.p1;
+    }
+
+    // ── CATALOG STATE ──
+    let productCatalog = [];
+    let hoodieProduct  = null;
+    let hoodieVariants = [];
     let currentVariant = 0;
     let autoPlayTimer;
 
+    const hoodieImg = document.getElementById("hoodie-image");
+    const hoodieBg  = document.getElementById("hoodie-bg");
+
+    // ── HOODIE VARIANT SWITCHER ──
     function setVariant(index, userClick) {
       const variant = hoodieVariants[index];
       if (!variant) return;
@@ -2371,24 +2437,174 @@
         hoodieImg.style.opacity = "1";
         hoodieImg.style.transform = "translateY(0) scale(1)";
       }, 200);
-      colorDots.forEach(d => d.classList.remove("active"));
-      if (colorDots[index]) colorDots[index].classList.add("active");
+      document.querySelectorAll("#colorDotsContainer .color-dot").forEach(d => d.classList.remove("active"));
+      const activeDot = document.querySelector(`#colorDotsContainer .color-dot[data-variant="${index}"]`);
+      if (activeDot) activeDot.classList.add("active");
+      document.getElementById("selectedColorName").textContent = variant.name;
       currentVariant = index;
       if (userClick) { clearInterval(autoPlayTimer); autoPlayTimer = setInterval(autoAdvance, 4000); }
     }
     function autoAdvance() { setVariant((currentVariant + 1) % hoodieVariants.length, false); }
-    colorDots.forEach(dot => dot.addEventListener("click", () => setVariant(parseInt(dot.getAttribute("data-variant"), 10), true)));
-    autoPlayTimer = setInterval(autoAdvance, 4000);
 
-    // ── SIZE SELECTOR ──
-    let selectedSize = "M";
-    document.querySelectorAll(".size-btn:not(.sold-out)").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".size-btn").forEach(b => b.classList.remove("selected"));
-        btn.classList.add("selected");
-        selectedSize = btn.dataset.size;
-      });
+    // ── RENDER HOODIES SECTION FROM API ──
+    function initHoodieSection(product) {
+      hoodieProduct = product;
+      const colors = toArr(product.colors);
+      const sizes  = toArr(product.sizes);
+
+      // Build variants array
+      hoodieVariants = colors.map((color, i) => ({
+        name: color,
+        img:  getProductImg(product.id, color),
+        bg:   COLOR_BG[color] || `radial-gradient(circle at top, #2a2a33, #050507)`
+      }));
+
+      // Render color dots
+      document.getElementById("colorDotsContainer").innerHTML = colors.map((color, i) =>
+        `<button class="color-dot${i === 0 ? ' active' : ''}" data-variant="${i}"
+          style="--dot-color:${COLOR_HEX[color] || '#888'};" aria-label="${color}"></button>`
+      ).join("");
+      document.querySelectorAll("#colorDotsContainer .color-dot").forEach(dot =>
+        dot.addEventListener("click", () => setVariant(parseInt(dot.dataset.variant), true))
+      );
+
+      // Render size buttons
+      document.getElementById("sizeBtnsContainer").innerHTML = sizes.map((size, i) =>
+        `<button class="size-btn${i === 0 ? ' selected' : ''}" data-size="${size}">${size}</button>`
+      ).join("");
+      selectedSize = sizes[0] || "M";
+      document.querySelectorAll("#sizeBtnsContainer .size-btn").forEach(btn =>
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("#sizeBtnsContainer .size-btn").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          selectedSize = btn.dataset.size;
+        })
+      );
+
+      document.getElementById("addCartBtn").textContent = `Add to Cart — $${product.price}`;
+      currentVariant = 0;
+      setVariant(0, false);
+      autoPlayTimer = setInterval(autoAdvance, 4000);
+    }
+
+    // ── RENDER COLLECTIONS GRID FROM API ──
+    function renderCollectionsGrid() {
+      const grid = document.getElementById("productsGrid");
+      if (!grid) return;
+      if (!productCatalog.length) {
+        grid.innerHTML = `<div class="card reveal visible"><div class="card-tag">Offline</div><div class="card-title">Server not running</div><div class="card-media"><img src="${CARD_IMGS.p1}" alt="" /></div><div class="card-footer"><span>Start the backend first</span></div></div>`;
+        return;
+      }
+      grid.innerHTML = productCatalog.map(p => {
+        const colors = toArr(p.colors);
+        return `<div class="card reveal visible" onclick="openQV('${p.id}')" style="cursor:pointer;">
+          <div class="card-tag">${p.category}</div>
+          <div class="card-title">${p.name}</div>
+          <div class="card-media">
+            <img src="${CARD_IMGS[p.id] || CARD_IMGS.p1}" alt="${p.name}" />
+          </div>
+          <div class="card-footer">
+            <span>$${p.price} · ${colors.length} color${colors.length !== 1 ? 's' : ''}</span>
+            <span class="chip-small">Quick View</span>
+          </div>
+        </div>`;
+      }).join("");
+    }
+
+    async function loadCatalog() {
+      try {
+        const res  = await fetch(`${API}/products`);
+        const data = await res.json();
+        if (data.success && data.data.length) {
+          productCatalog = data.data;
+          const hoodie = productCatalog.find(p => p.id === "p1") || productCatalog[0];
+          initHoodieSection(hoodie);
+          renderCollectionsGrid();
+        }
+      } catch { renderCollectionsGrid(); }
+    }
+
+    // ── PRODUCT QUICK-VIEW MODAL ──
+    let qvProduct = null;
+    let qvSelectedColor = null;
+    let qvSelectedSize  = null;
+
+    function openQV(productId) {
+      const p = productCatalog.find(x => x.id === productId);
+      if (!p) return;
+      qvProduct = p;
+      const pColors = toArr(p.colors);
+      const pSizes  = toArr(p.sizes);
+      qvSelectedColor = pColors[0] || null;
+      qvSelectedSize  = pSizes[0]  || null;
+
+      document.getElementById("qvTag").textContent   = p.category;
+      document.getElementById("qvName").textContent  = p.name;
+      document.getElementById("qvPrice").textContent = `$${p.price}`;
+      document.getElementById("qvImg").src = getProductImg(p.id, qvSelectedColor);
+      document.getElementById("qvImg").alt = p.name;
+      document.getElementById("qvColorName").textContent = qvSelectedColor || "—";
+
+      // Color dots
+      const colors = pColors;
+      document.getElementById("qvColorDots").innerHTML = colors.map((c, i) =>
+        `<button class="color-dot${i === 0 ? ' active' : ''}" data-color="${c}"
+          style="--dot-color:${COLOR_HEX[c] || '#888'};" aria-label="${c}"></button>`
+      ).join("");
+      document.querySelectorAll("#qvColorDots .color-dot").forEach(dot =>
+        dot.addEventListener("click", () => {
+          qvSelectedColor = dot.dataset.color;
+          document.getElementById("qvColorName").textContent = qvSelectedColor;
+          document.getElementById("qvImg").src = getProductImg(p.id, qvSelectedColor);
+          document.querySelectorAll("#qvColorDots .color-dot").forEach(d => d.classList.remove("active"));
+          dot.classList.add("active");
+        })
+      );
+
+      // Size buttons
+      const sizes = pSizes;
+      document.getElementById("qvSizeBtns").innerHTML = sizes.map((s, i) =>
+        `<button class="size-btn${i === 0 ? ' selected' : ''}" data-size="${s}">${s}</button>`
+      ).join("");
+      document.querySelectorAll("#qvSizeBtns .size-btn").forEach(btn =>
+        btn.addEventListener("click", () => {
+          qvSelectedSize = btn.dataset.size;
+          document.querySelectorAll("#qvSizeBtns .size-btn").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+        })
+      );
+
+      document.getElementById("qvAddBtn").textContent = `Add to Cart — $${p.price}`;
+      document.getElementById("qvBackdrop").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeQV(e) { if (e.target === document.getElementById("qvBackdrop")) closeQVDirect(); }
+    function closeQVDirect() {
+      document.getElementById("qvBackdrop").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    document.getElementById("qvAddBtn").addEventListener("click", async () => {
+      if (!qvProduct || !qvSelectedSize || !qvSelectedColor) {
+        showToast("Please select a size and color", true); return;
+      }
+      const btn = document.getElementById("qvAddBtn");
+      btn.textContent = "Adding..."; btn.disabled = true;
+      try {
+        const res = await fetch(`${API}/cart`, {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ session_id: SESSION_ID, product_id: qvProduct.id, product_name: qvProduct.name, size: qvSelectedSize, color: qvSelectedColor, quantity: 1, price: qvProduct.price })
+        });
+        const data = await res.json();
+        if (data.success) { cartItems = data.cart; updateCartUI(); closeQVDirect(); showToast(`Added: ${qvProduct.name} · ${qvSelectedColor} · ${qvSelectedSize}`); setTimeout(openCart, 400); }
+        else showToast(data.message, true);
+      } catch { showToast("Server offline", true); }
+      btn.textContent = `Add to Cart — $${qvProduct.price}`; btn.disabled = false;
     });
+
+    // ── SIZE SELECTOR (hoodies section) ──
+    let selectedSize = "M";
 
     // ── CART STATE ──
     let cartItems = [];
@@ -2495,14 +2711,15 @@
       const btn = document.getElementById("addCartBtn");
       btn.textContent = "Adding...";
       btn.disabled = true;
+      const activeProduct = hoodieProduct || { id: "p1", name: "Double Zipper Hoodie", price: 89 };
       try {
         const res = await fetch(`${API}/cart`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            session_id: SESSION_ID, product_id: "p1",
-            product_name: "Double Zipper Hoodie",
-            size: selectedSize, color, quantity: 1, price: 89
+            session_id: SESSION_ID, product_id: activeProduct.id,
+            product_name: activeProduct.name,
+            size: selectedSize, color, quantity: 1, price: Number(activeProduct.price || 0)
           })
         });
         const data = await res.json();
@@ -2513,7 +2730,7 @@
           setTimeout(openCart, 400);
         } else { showToast(data.message, true); }
       } catch { showToast("Server offline — run: npm start", true); }
-      btn.textContent = "Add to Cart — $89";
+      btn.textContent = `Add to Cart — $${Number(activeProduct.price || 0).toFixed(2)}`;
       btn.disabled = false;
     });
 
@@ -2686,6 +2903,7 @@
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
     // load cart on start
+    loadCatalog();
     loadCart();
   </script>
 </body>
