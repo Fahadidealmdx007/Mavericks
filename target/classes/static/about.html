@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — MAVERICKS | The Story Behind the Brand</title>
+  <meta name="description" content="Mavericks was born in a bedroom in Dhaka. Built on heavyweight fabrics, sharp silhouettes, and the belief that streetwear should last years, not weeks." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mavericks.com.bd/about.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mavericks.com.bd/about.html" />
+  <meta property="og:title" content="About — MAVERICKS | The Story Behind the Brand" />
+  <meta property="og:description" content="Built in a bedroom. Worn on streets. Mavericks is a movement, not just a brand." />
+  <meta property="og:image" content="https://images.pexels.com/photos/5319298/pexels-photo-5319298.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Montserrat",sans-serif;}
+    html{scroll-behavior:smooth;}
+    body{background:#050507;color:#fff;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+
+    nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;z-index:100;background:rgba(5,5,7,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .logo{font-size:22px;font-weight:900;letter-spacing:6px;}
+    .nav-links{display:flex;gap:22px;font-size:13px;text-transform:uppercase;letter-spacing:2px;}
+    .nav-links a{opacity:0.7;transition:opacity 0.2s;}
+    .nav-links a:hover{opacity:1;}
+    .nav-links a.active{opacity:1;border-bottom:2px solid #fff;padding-bottom:2px;}
+
+    /* HERO */
+    .about-hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;}
+    .about-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(255,0,120,0.12),transparent 60%),radial-gradient(circle at 70% 50%,rgba(100,0,255,0.1),transparent 60%);}
+    .about-hero h1{font-size:clamp(48px,8vw,100px);font-weight:900;letter-spacing:12px;line-height:1;}
+    .about-hero p{margin-top:20px;font-size:16px;letter-spacing:4px;text-transform:uppercase;opacity:0.5;}
+
+    /* SECTIONS */
+    .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+    .section{padding:100px 0;}
+
+    .label{font-size:11px;text-transform:uppercase;letter-spacing:4px;opacity:0.45;margin-bottom:14px;}
+    .title{font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:2px;line-height:1.15;}
+    .body-text{font-size:15px;line-height:1.9;color:#b0b0b0;max-width:580px;}
+
+    /* STORY */
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+    .story-img{border-radius:24px;overflow:hidden;aspect-ratio:4/5;}
+    .story-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(15%);}
+
+    /* VALUES */
+    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px;}
+    .value-card{padding:32px;border-radius:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);transition:border-color 0.3s,transform 0.3s;}
+    .value-card:hover{border-color:rgba(255,255,255,0.25);transform:translateY(-4px);}
+    .value-icon{font-size:28px;margin-bottom:16px;}
+    .value-title{font-size:14px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+    .value-text{font-size:13px;line-height:1.7;color:#888;}
+
+    /* TEAM */
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:50px;}
+    .team-card{border-radius:20px;overflow:hidden;background:#0e0e16;border:1px solid rgba(255,255,255,0.07);}
+    .team-img{aspect-ratio:1;overflow:hidden;}
+    .team-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%);transition:transform 0.4s,filter 0.4s;}
+    .team-card:hover .team-img img{transform:scale(1.05);filter:grayscale(0%);}
+    .team-info{padding:20px;}
+    .team-name{font-size:15px;font-weight:800;letter-spacing:2px;}
+    .team-role{font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.45;margin-top:4px;}
+
+    /* STATS */
+    .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.07);border-radius:20px;overflow:hidden;margin-top:80px;}
+    .stat-block{padding:40px 30px;background:#050507;text-align:center;}
+    .stat-num{font-size:40px;font-weight:900;letter-spacing:2px;}
+    .stat-lbl{font-size:11px;text-transform:uppercase;letter-spacing:3px;opacity:0.4;margin-top:8px;}
+
+    /* CTA */
+    .cta-section{padding:100px 0;text-align:center;}
+    .cta-section .title{margin-bottom:20px;}
+    .cta-section p{color:#888;font-size:15px;margin-bottom:36px;}
+    .btn-white{display:inline-flex;align-items:center;gap:8px;padding:14px 36px;border-radius:999px;background:#fff;color:#000;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:2px;text-decoration:none;transition:transform 0.2s,background 0.2s;}
+    .btn-white:hover{background:#e0e0e0;transform:translateY(-2px);}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 36px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;text-decoration:none;margin-left:14px;transition:background 0.2s,transform 0.2s;}
+    .btn-outline:hover{background:rgba(255,255,255,0.07);transform:translateY(-2px);}
+
+    /* FOOTER */
+    footer{padding:40px 48px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center;font-size:12px;opacity:0.35;}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:900px){
+      nav{padding:14px 20px;}
+      .nav-links{display:none;}
+      .story-grid{grid-template-columns:1fr;}
+      .story-img{display:none;}
+      .values-grid{grid-template-columns:1fr 1fr;}
+      .team-grid{grid-template-columns:1fr 1fr;}
+      .stats-bar{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:500px){
+      .values-grid,.team-grid,.stats-bar{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">MAVERICKS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="lookbook.html">Lookbook</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="about-hero">
+    <div>
+      <h1>OUR STORY</h1>
+      <p>Built in a bedroom. Worn on streets.</p>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section class="section">
+    <div class="container">
+      <div class="story-grid">
+        <div class="reveal">
+          <div class="label">Who We Are</div>
+          <div class="title">Not a brand.<br/>A movement.</div>
+          <p class="body-text" style="margin-top:20px;">
+            Mavericks was born out of frustration — frustration with fast fashion, with clothes that fall apart, with brands that copy instead of create.
+          </p>
+          <p class="body-text" style="margin-top:16px;">
+            We started with one hoodie, one colorway, and one idea: make something so good that people would rather wear it every day than buy five average pieces. Heavy fabrics. Sharp silhouettes. Colorways that don't ask for permission.
+          </p>
+          <p class="body-text" style="margin-top:16px;">
+            We don't do seasons. We do drops — limited, intentional, and built to last. Every piece is designed to outlive trends and become part of your identity.
+          </p>
+          <a href="index.html#hoodies" class="btn-white" style="margin-top:32px;">Shop Drop 01</a>
+        </div>
+        <div class="story-img reveal">
+          <img src="https://images.pexels.com/photos/5319298/pexels-photo-5319298.jpeg?auto=compress&cs=tinysrgb&w=600&h=750&fit=crop" alt="Mavericks story" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="container">
+    <div class="stats-bar reveal">
+      <div class="stat-block"><div class="stat-num">01</div><div class="stat-lbl">Drops Released</div></div>
+      <div class="stat-block"><div class="stat-num">4</div><div class="stat-lbl">Core Products</div></div>
+      <div class="stat-block"><div class="stat-num">3</div><div class="stat-lbl">Colorways</div></div>
+      <div class="stat-block"><div class="stat-num">∞</div><div class="stat-lbl">Ways to Wear It</div></div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">What We Stand For</div>
+        <div class="title">The Mavericks Code</div>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-icon">⚡</div>
+          <div class="value-title">No Fast Fashion</div>
+          <div class="value-text">Every piece is made to last years, not weeks. We use heavyweight fabrics and reinforce every seam. Quality over quantity, always.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🔥</div>
+          <div class="value-title">Limited Drops Only</div>
+          <div class="value-text">We don't overproduce. When a drop sells out, it's gone. This keeps our pieces rare, our quality high, and your fit exclusive.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">✊</div>
+          <div class="value-title">Built for Everyone</div>
+          <div class="value-text">Unisex sizing, inclusive fits. Mavericks is for anyone who refuses to blend in — regardless of gender, size, or background.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🎨</div>
+          <div class="value-title">Original Design</div>
+          <div class="value-text">No knockoffs, no inspiration theft. Every colorway, silhouette, and detail is designed in-house from scratch.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">📦</div>
+          <div class="value-title">Honest Pricing</div>
+          <div class="value-text">We price based on what it costs to make something properly. No inflated brand tax — just real value for real quality.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-icon">🌍</div>
+          <div class="value-title">Community First</div>
+          <div class="value-text">Mavericks grows with its community. Drop list members get first access, early prices, and input on future colorways.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">The People</div>
+        <div class="title">Behind Mavericks</div>
+      </div>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-img">
+            <img src="https://images.pexels.com/photos/2108816/pexels-photo-2108816.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Founder" />
+          </div>
+          <div class="team-info">
+            <div class="team-name">FARHAD</div>
+            <div class="team-role">Founder & Creative Director</div>
+          </div>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-img">
+            <img src="https://images.pexels.com/photos/5319493/pexels-photo-5319493.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Design" />
+          </div>
+          <div class="team-info">
+            <div class="team-name">DESIGN TEAM</div>
+            <div class="team-role">Apparel Design & Fit</div>
+          </div>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-img">
+            <img src="https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Operations" />
+          </div>
+          <div class="team-info">
+            <div class="team-name">OPS TEAM</div>
+            <div class="team-role">Production & Fulfillment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="container reveal">
+      <div class="title">Ready to wear it?</div>
+      <p>Drop 01 is live now. Limited stock.</p>
+      <a href="index.html#hoodies" class="btn-white">Shop Now</a>
+      <a href="contact.html" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>© <span id="year"></span> Mavericks Studio</span>
+    <span>Hotter Than Yesterday</span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target);} }), {threshold:0.1});
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

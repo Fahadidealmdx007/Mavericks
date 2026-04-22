@@ -2,7 +2,6 @@ package com.mavericks.controller;
 
 import com.mavericks.model.Product;
 import com.mavericks.repository.ProductRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +11,14 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/products")
-@RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class ProductController {
 
     private final ProductRepository productRepository;
+
+    public ProductController(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     // Seed products on first run (same as Node.js version)
     @Bean

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — MAVERICKS | Get in Touch</title>
+  <meta name="description" content="Contact Mavericks for order issues, sizing questions, wholesale inquiries or collaboration ideas. We respond within 24–48 hours." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mavericks.com.bd/contact.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mavericks.com.bd/contact.html" />
+  <meta property="og:title" content="Contact MAVERICKS" />
+  <meta property="og:description" content="Questions about your order, sizing, or a collab? We read every message and reply within 24–48 hours." />
+  <meta property="og:image" content="https://images.pexels.com/photos/5840463/pexels-photo-5840463.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Montserrat",sans-serif;}
+    body{background:#050507;color:#fff;overflow-x:hidden;min-height:100vh;}
+    a{color:inherit;text-decoration:none;}
+
+    nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;z-index:100;background:rgba(5,5,7,0.95);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .logo{font-size:22px;font-weight:900;letter-spacing:6px;}
+    .nav-links{display:flex;gap:22px;font-size:13px;text-transform:uppercase;letter-spacing:2px;}
+    .nav-links a{opacity:0.7;transition:opacity 0.2s;}
+    .nav-links a:hover,.nav-links a.active{opacity:1;}
+    .nav-links a.active{border-bottom:2px solid #fff;padding-bottom:2px;}
+
+    .page-hero{padding:140px 48px 60px;text-align:center;}
+    .page-hero h1{font-size:clamp(40px,7vw,80px);font-weight:900;letter-spacing:10px;}
+    .page-hero p{margin-top:14px;font-size:14px;letter-spacing:4px;text-transform:uppercase;opacity:0.4;}
+
+    .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+    /* CONTACT GRID */
+    .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;padding:60px 0 100px;align-items:start;}
+
+    /* LEFT INFO */
+    .contact-info h2{font-size:22px;font-weight:900;letter-spacing:3px;margin-bottom:16px;}
+    .contact-info p{font-size:14px;line-height:1.8;color:#888;margin-bottom:40px;}
+
+    .contact-detail{display:flex;flex-direction:column;gap:24px;}
+    .contact-item{display:flex;gap:16px;align-items:flex-start;}
+    .contact-item-icon{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .contact-item-text .label{font-size:10px;text-transform:uppercase;letter-spacing:3px;opacity:0.4;margin-bottom:4px;}
+    .contact-item-text .value{font-size:14px;font-weight:600;}
+
+    .social-row{display:flex;gap:12px;margin-top:36px;}
+    .social-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;transition:border-color 0.2s,background 0.2s,transform 0.2s;}
+    .social-btn:hover{border-color:#fff;background:rgba(255,255,255,0.08);transform:translateY(-2px);}
+
+    /* RIGHT FORM */
+    .contact-form-wrap{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:40px;}
+
+    .form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+    .form-group label{font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.5;}
+    .form-group input,.form-group textarea,.form-group select{padding:13px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;font-size:14px;font-family:inherit;outline:none;transition:border-color 0.2s;}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(255,255,255,0.4);}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.2);}
+    .form-group select option{background:#111;}
+    .form-group textarea{resize:vertical;min-height:140px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+    .submit-btn{width:100%;padding:15px;border-radius:999px;background:#fff;color:#000;border:none;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:2px;cursor:pointer;margin-top:8px;transition:background 0.2s,transform 0.2s;}
+    .submit-btn:hover{background:#e0e0e0;transform:translateY(-2px);}
+    .submit-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+    /* SUCCESS STATE */
+    .form-success{display:none;text-align:center;padding:40px 20px;}
+    .form-success .check{width:64px;height:64px;border-radius:50%;background:#fff;color:#000;font-size:26px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-weight:900;}
+    .form-success h3{font-size:18px;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
+    .form-success p{font-size:13px;color:#888;line-height:1.7;}
+
+    /* FAQ STRIP */
+    .faq-strip{padding:60px 0 100px;}
+    .faq-strip h2{font-size:14px;text-transform:uppercase;letter-spacing:4px;opacity:0.4;margin-bottom:28px;}
+    .faq-list{display:flex;flex-direction:column;gap:2px;}
+    .faq-item{border-radius:12px;overflow:hidden;}
+    .faq-q{padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);font-size:14px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background 0.2s;}
+    .faq-q:hover{background:rgba(255,255,255,0.06);}
+    .faq-q span{opacity:0.5;font-size:18px;transition:transform 0.3s;}
+    .faq-q.open span{transform:rotate(45deg);}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s ease;font-size:13px;color:#888;line-height:1.8;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-top:none;border-radius:0 0 12px 12px;padding:0 20px;}
+    .faq-a.open{max-height:200px;padding:16px 20px;}
+
+    footer{padding:40px 48px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center;font-size:12px;opacity:0.35;}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);padding:14px 28px;border-radius:999px;font-size:13px;font-weight:700;z-index:999;opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    @media(max-width:900px){
+      nav{padding:14px 20px;}
+      .nav-links{display:none;}
+      .page-hero{padding:120px 20px 40px;}
+      .contact-grid{grid-template-columns:1fr;gap:40px;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">MAVERICKS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="lookbook.html">Lookbook</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <h1>CONTACT</h1>
+    <p>We read every message</p>
+  </div>
+
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT -->
+      <div class="reveal">
+        <h2>GET IN TOUCH</h2>
+        <p>Questions about sizing? A collab idea? A wholesale inquiry? We're a small team and we respond to everything within 24–48 hours.</p>
+
+        <div class="contact-detail">
+          <div class="contact-item">
+            <div class="contact-item-icon">✉</div>
+            <div class="contact-item-text">
+              <div class="label">Email</div>
+              <div class="value">hello@mavericks.com.bd</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-text">
+              <div class="label">Based in</div>
+              <div class="value">Dhaka, Bangladesh</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">⏱</div>
+            <div class="contact-item-text">
+              <div class="label">Response time</div>
+              <div class="value">Within 24–48 hours</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-row">
+          <a href="#" class="social-btn">IG</a>
+          <a href="#" class="social-btn">TK</a>
+          <a href="#" class="social-btn">X</a>
+          <a href="#" class="social-btn">FB</a>
+        </div>
+      </div>
+
+      <!-- RIGHT FORM -->
+      <div class="contact-form-wrap reveal">
+        <div id="contactFormArea">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" id="cfFirstName" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="cfLastName" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="cfEmail" placeholder="john@example.com" required />
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select id="cfSubject">
+              <option value="Order Issue">Order Issue</option>
+              <option value="Sizing Question">Sizing Question</option>
+              <option value="Wholesale Inquiry">Wholesale Inquiry</option>
+              <option value="Collab / Partnership">Collab / Partnership</option>
+              <option value="General Question">General Question</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="cfMessage" placeholder="Tell us what's on your mind..."></textarea>
+          </div>
+          <button class="submit-btn" id="contactSubmitBtn" onclick="submitContact()">Send Message</button>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          <div class="check">✓</div>
+          <h3>Message Sent</h3>
+          <p>Thanks for reaching out. We'll get back to you at your email within 24–48 hours.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ STRIP -->
+    <div class="faq-strip reveal">
+      <h2>Quick Answers</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">How long does shipping take? <span>+</span></div>
+          <div class="faq-a">Domestic (Bangladesh): 3–5 business days. International: 10–20 business days depending on location. You'll receive a tracking number once your order ships.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Can I return or exchange my order? <span>+</span></div>
+          <div class="faq-a">Yes. We accept returns within 14 days of delivery if the item is unworn and unwashed with original tags. Contact us first and we'll guide you through the process.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Do you do wholesale or bulk orders? <span>+</span></div>
+          <div class="faq-a">Yes — for orders of 20+ pieces we offer wholesale pricing. Use the contact form above and select "Wholesale Inquiry" as the subject.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">How do I know my size? <span>+</span></div>
+          <div class="faq-a">Check our size guide on the product page. Our hoodies are oversized by design — if you're between sizes, we recommend sizing down for a regular fit or staying true to size for the oversized look.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>© <span id="year"></span> Mavericks Studio</span>
+    <span>Hotter Than Yesterday</span>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const API = "http://localhost:3000/api";
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function showToast(msg, isError = false) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.style.background = isError ? "#e03" : "#fff";
+      t.style.color = isError ? "#fff" : "#000";
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 3000);
+    }
+
+    async function submitContact() {
+      const name    = (document.getElementById("cfFirstName").value + " " + document.getElementById("cfLastName").value).trim();
+      const email   = document.getElementById("cfEmail").value.trim();
+      const subject = document.getElementById("cfSubject").value;
+      const message = document.getElementById("cfMessage").value.trim();
+      const btn     = document.getElementById("contactSubmitBtn");
+
+      if (!name || !email || !message) { showToast("Please fill in all required fields", true); return; }
+
+      btn.textContent = "Sending...";
+      btn.disabled = true;
+
+      try {
+        const res  = await fetch(`${API}/contact`, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({name, email, subject, message}) });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById("contactFormArea").style.display = "none";
+          document.getElementById("formSuccess").style.display = "block";
+        } else {
+          showToast(data.message, true);
+          btn.textContent = "Send Message";
+          btn.disabled = false;
+        }
+      } catch {
+        showToast("Could not send. Make sure the server is running.", true);
+        btn.textContent = "Send Message";
+        btn.disabled = false;
+      }
+    }
+
+    function toggleFaq(el) {
+      const answer = el.nextElementSibling;
+      el.classList.toggle("open");
+      answer.classList.toggle("open");
+    }
+
+    const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target);} }), {threshold:0.1});
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

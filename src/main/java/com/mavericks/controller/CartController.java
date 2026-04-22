@@ -2,7 +2,6 @@ package com.mavericks.controller;
 
 import com.mavericks.model.CartItem;
 import com.mavericks.repository.CartRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +10,14 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/cart")
-@RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class CartController {
 
     private final CartRepository cartRepository;
+
+    public CartController(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
 
     // POST /api/cart — add item
     @PostMapping

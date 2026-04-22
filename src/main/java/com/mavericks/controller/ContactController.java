@@ -2,7 +2,6 @@ package com.mavericks.controller;
 
 import com.mavericks.model.ContactMessage;
 import com.mavericks.repository.ContactRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +9,14 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/contact")
-@RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class ContactController {
 
     private final ContactRepository contactRepository;
+
+    public ContactController(ContactRepository contactRepository) {
+        this.contactRepository = contactRepository;
+    }
 
     // POST /api/contact — send message
     @PostMapping
@@ -49,10 +51,14 @@ public class ContactController {
     // PATCH /api/contact/{id}/read — mark as read
     @PatchMapping("/{id}/read")
     public ResponseEntity<Map<String, Object>> markRead(@PathVariable String id) {
-        return contactRepository.findById(id).map(msg -> {
+        return contactRepository.findById(id).<ResponseEntity<Map<String, Object>>>map(msg -> {
             msg.setStatus("read");
             contactRepository.save(msg);
             return ResponseEntity.ok(Map.of("success", true, "message", "Marked as read"));
-        }).orElse(ResponseEntity.status(404).body(Map.of("success", false, "message", "Message not found")));
+        }).orElseGet(this::notFoundMessage);
+    }
+
+    private ResponseEntity<Map<String, Object>> notFoundMessage() {
+        return ResponseEntity.status(404).body(Map.of("success", false, "message", "Message not found"));
     }
 }

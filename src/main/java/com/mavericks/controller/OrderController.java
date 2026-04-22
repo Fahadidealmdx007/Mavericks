@@ -2,7 +2,6 @@ package com.mavericks.controller;
 
 import com.mavericks.model.Order;
 import com.mavericks.repository.OrderRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +9,14 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/orders")
-@RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class OrderController {
 
     private final OrderRepository orderRepository;
+
+    public OrderController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     // POST /api/orders — place order
     @PostMapping
@@ -63,11 +65,11 @@ public class OrderController {
             return bad("Invalid status");
         }
 
-        return orderRepository.findById(id).map(order -> {
+        return orderRepository.findById(id).<ResponseEntity<Map<String, Object>>>map(order -> {
             order.setStatus(status);
             orderRepository.save(order);
             return ResponseEntity.ok(Map.of("success", true, "message", "Order updated to " + status));
-        }).orElse(bad("Order not found"));
+        }).orElseGet(() -> bad("Order not found"));
     }
 
     private ResponseEntity<Map<String, Object>> bad(String msg) {

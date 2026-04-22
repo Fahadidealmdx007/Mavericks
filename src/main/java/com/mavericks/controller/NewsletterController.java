@@ -2,7 +2,6 @@ package com.mavericks.controller;
 
 import com.mavericks.model.NewsletterSubscriber;
 import com.mavericks.repository.NewsletterRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +9,14 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/newsletter")
-@RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class NewsletterController {
 
     private final NewsletterRepository newsletterRepository;
+
+    public NewsletterController(NewsletterRepository newsletterRepository) {
+        this.newsletterRepository = newsletterRepository;
+    }
 
     // POST /api/newsletter — subscribe
     @PostMapping
