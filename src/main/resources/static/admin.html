@@ -484,14 +484,14 @@
             <tr>
               <td style="opacity:0.4;font-size:11px;">${String(o.id).slice(0,8)}</td>
               <td>
-                <div style="font-weight:700;">${o.customer_name}</div>
+                <div style="font-weight:700;">${o.customerName}</div>
                 <div style="font-size:11px;opacity:0.4;">${o.email}</div>
               </td>
-              <td>${o.product_name}</td>
+              <td>${o.productName}</td>
               <td>${o.size}</td>
               <td>${o.color}</td>
               <td style="font-weight:800;">$${parseFloat(o.total).toFixed(2)}</td>
-              <td style="font-size:11px;opacity:0.5;">${formatDate(o.created_at)}</td>
+              <td style="font-size:11px;opacity:0.5;">${formatDate(o.createdAt)}</td>
               <td>
                 ${showStatusEdit
                   ? `<select class="status-select" onchange="updateStatus('${o.id}', this.value)">
@@ -565,7 +565,7 @@
               <tr>
                 <td style="opacity:0.3;">${i + 1}</td>
                 <td>${s.email}</td>
-                <td style="font-size:12px;opacity:0.5;">${formatDate(s.subscribed_at)}</td>
+                <td style="font-size:12px;opacity:0.5;">${formatDate(s.subscribedAt)}</td>
               </tr>
             `).join("")}
           </tbody>
@@ -597,7 +597,7 @@
                 </td>
                 <td style="font-weight:600;">${m.subject}</td>
                 <td><div class="msg-text">${m.message.length > 100 ? m.message.slice(0,100) + "…" : m.message}</div></td>
-                <td style="font-size:11px;opacity:0.5;">${formatDate(m.sent_at)}</td>
+                <td style="font-size:11px;opacity:0.5;">${formatDate(m.sentAt)}</td>
                 <td><span class="status ${m.status}">${m.status}</span></td>
                 <td>
                   ${m.status === 'unread'

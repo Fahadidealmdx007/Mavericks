@@ -11,19 +11,35 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @Column(nullable = false)
     private String customerName;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String address;
 
+    @Column(nullable = false)
     private String productId;
     private String productName;
+
+    @Column(nullable = false)
     private String size;
+
+    @Column(nullable = false)
     private String color;
+
+    @Column(nullable = false)
     private int quantity;
+
+    @Column(nullable = false)
     private double total;
 
+    @Column(nullable = false)
     private String status = "pending";
 
+    @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public Order() {
@@ -47,6 +63,16 @@ public class Order {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (status == null || status.isBlank()) {
+            status = "pending";
+        }
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
     }
 
     public static class Builder {

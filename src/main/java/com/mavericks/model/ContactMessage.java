@@ -11,15 +11,22 @@ public class ContactMessage {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String subject;
 
-    @Column(length = 2000)
+    @Column(nullable = false, length = 2000)
     private String message;
 
+    @Column(nullable = false)
     private String status = "unread";
 
+    @Column(nullable = false)
     private LocalDateTime sentAt = LocalDateTime.now();
 
     public ContactMessage() {
@@ -37,6 +44,16 @@ public class ContactMessage {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (status == null || status.isBlank()) {
+            status = "unread";
+        }
+        if (sentAt == null) {
+            sentAt = LocalDateTime.now();
+        }
     }
 
     public static class Builder {

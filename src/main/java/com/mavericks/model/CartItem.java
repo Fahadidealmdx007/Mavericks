@@ -11,14 +11,28 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @Column(nullable = false)
     private String sessionId;
+
+    @Column(nullable = false)
     private String productId;
+
+    @Column(nullable = false)
     private String productName;
+
+    @Column(nullable = false)
     private String size;
+
+    @Column(nullable = false)
     private String color;
+
+    @Column(nullable = false)
     private int quantity;
+
+    @Column(nullable = false)
     private double price;
 
+    @Column(nullable = false)
     private LocalDateTime addedAt = LocalDateTime.now();
 
     public CartItem() {
@@ -39,6 +53,13 @@ public class CartItem {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (addedAt == null) {
+            addedAt = LocalDateTime.now();
+        }
     }
 
     public static class Builder {

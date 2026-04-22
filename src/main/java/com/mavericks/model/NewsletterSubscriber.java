@@ -11,9 +11,10 @@ public class NewsletterSubscriber {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private LocalDateTime subscribedAt = LocalDateTime.now();
 
     public NewsletterSubscriber() {
@@ -27,6 +28,13 @@ public class NewsletterSubscriber {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (subscribedAt == null) {
+            subscribedAt = LocalDateTime.now();
+        }
     }
 
     public static class Builder {
