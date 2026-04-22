@@ -1,24 +1,30 @@
-# Compiled class file
+target/
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
-*.nar
 *.ear
+*.nar
 *.zip
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+mavericksdb.mv.db
+mavericksdb.trace.db
+*.db
+
+.m2/
+
+.idea/
+.vscode/
+*.iml
+
+.DS_Store
+
+*.log
+.mtj.tmp/
 hs_err_pid*
 replay_pid*
+
+.env
+*.env
+application-secret.properties
