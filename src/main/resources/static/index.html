@@ -37,7 +37,7 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap"
     rel="stylesheet"
   />
-
+<a href="teams.html">Teams</a>
   <style>
     * {
       margin: 0;
@@ -243,13 +243,11 @@
       inset: 0;
       z-index: -2;
       overflow: hidden;
-    }
-
-    .hero-media video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(1.2);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 40%),
+        linear-gradient(to right, rgba(5,5,7,0.45), rgba(28,0,12,0.30)),
+        url("hero-background.jpg")
+          center / cover no-repeat;
     }
 
     .hero-overlay {
@@ -257,8 +255,8 @@
       inset: 0;
       background:
         radial-gradient(circle at top left, rgba(255,255,255,0.1), transparent 45%),
-        radial-gradient(circle at bottom right, rgba(255,0,120,0.35), transparent 55%),
-        linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.9));
+        radial-gradient(circle at bottom right, rgba(255,0,120,0.25), transparent 55%),
+        linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.65));
       z-index: -1;
     }
 
@@ -2029,15 +2027,11 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-media">
-      <video autoplay muted loop playsinline aria-hidden="true">
-        <source src="hero.mp4" type="video/mp4" />
-      </video>
-    </div>
+    <div class="hero-media" aria-hidden="true"></div>
     <div class="hero-overlay"></div>
 
     <div class="section-inner hero-grid">
-      <div class="hero-copy reveal">
+      <div class="hero-copy">
         <h1>MAVERICKS</h1>
         <p class="hero-tagline">Hotter Than Yesterday</p>
         <p class="hero-subcopy">
@@ -2062,7 +2056,7 @@
         </div>
       </div>
 
-      <div class="hero-right reveal">
+      <div class="hero-right">
         <div class="hero-pill">Drop 01 · Limited stock</div>
         <div class="hero-card">
           <div class="hero-card-inner">
@@ -2071,9 +2065,9 @@
               <div class="hero-card-name">Race Day Tee — Statement Edition</div>
             </div>
             <div class="hero-card-image">
-              <img
-                src="https://images.pexels.com/photos/2108816/pexels-photo-2108816.jpeg?auto=compress&cs=tinysrgb&w=380&h=460&fit=crop"
-                alt="Mavericks hoodie mockup"
+                <img
+                src="https://images.pexels.com/photos/5319577/pexels-photo-5319577.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop"
+                alt="Race Day Tee - Statement Edition"
               />
             </div>
             <div class="hero-card-footer">
